@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,11 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-hgjx^-91&s3prz$mxn@f^psd-5x41k#(00&!7ki-ajy7c4+n5@'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -167,32 +164,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 SOCIALACCOUNT_QUERY_EMAIL = True
 
-# Google OAuth Settings
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "SCOPE": ["profile", "email"],
-        "AUTH_PARAMS": {"access_type": "online"},
-    },
-    "facebook": {
-        "METHOD": "oauth2",
-        "SCOPE": ["email", "public_profile"],
-        "AUTH_PARAMS": {"auth_type": "reauthenticate"},
-        "FIELDS": ["id", "email", "name"],
-    },
-}
 
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
-    'email',
-    'profile',
-    'openid',
-]
-
-
-# Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Or your email provider's SMTP server
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your-email@gmail.com'
-  # Use an app password if using Gmail
+SECRET_KEY = config("SECRET_KEY", default="changeme")
+DEBUG = config("DEBUG", default=True, cast=bool)
