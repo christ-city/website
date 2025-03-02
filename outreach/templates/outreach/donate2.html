@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Donation Type</title>
+    <link rel="stylesheet" href="{% static 'css/donate.css' %}">
+</head>
+<body>
+
+    <!-- 🌍 Donation Section -->
+    <section class="donate-section">
+        <h2 class="donate-title">Make a Lasting Impact</h2>
+        <p class="donate-subtitle">Select the best way to support our mission.</p>
+
+        <!-- 🏆 Donation Options (Side-by-Side in Containers) -->
+        <div class="donation-row">
+            
+            <!-- 🎒 One-Time Donation -->
+            <div class="donation-box one-time" data-type="one-time">
+                <div class="pricing-heading">
+                    <h3><strong>One-Time Donation</strong></h3>
+                </div>
+                <div class="pricing-img">
+                    
+                </div>
+                <div class="pricing-content">
+                    <ul>
+                        <li> Provide school supplies to underprivileged children.</li>
+                        <li> Make a single donation and change lives today.</li>
+                        
+                    </ul>
+                </div>
+                <div class="pricing-action">
+                    <a href="{% url 'donate_one_time' %}" class="btn btn-theme donate-btn">Donate Now</a>
+                </div>
+            </div>
+
+            <!-- 🎓 Monthly Giving -->
+            <div class="donation-box special monthly" data-type="monthly">
+                <div class="pricing-heading">
+                    <h3><strong>Monthly Giving</strong></h3>
+                </div>
+                <div class="pricing-img">
+                    <img src="{% static 'img/monthly-bgds.jpg' %}" alt="Monthly Giving">
+                </div>
+                <div class="pricing-content">
+                    <ul>
+                        <li> Provide consistent support for long-term change.</li>
+                        <li> Help fund education, food, and shelter every month.</li>
+                        <li> Become a valued partner in transforming lives.</li>
+                    </ul>
+                </div>
+                <div class="pricing-action">
+                    <a href="{% url 'donate_monthly' %}" class="btn btn-theme donate-btn">Subscribe</a>
+                </div>
+            </div>
+
+        </div> <!-- End Donation Row -->
+    </section>
+
+    <script src="{% static 'js/donate.js' %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const donateBoxes = document.querySelectorAll(".donation-box");
+
+    donateBoxes.forEach(box => {
+        box.addEventListener("mouseenter", () => {
+            donateBoxes.forEach(otherBox => {
+                if (otherBox !== box) {
+                    otherBox.classList.add("blur");
+                }
+            });
+        });
+
+        box.addEventListener("mouseleave", () => {
+            donateBoxes.forEach(otherBox => {
+                otherBox.classList.remove("blur");
+            });
+        });
+    });
+});
+
+    </script>
+</body>
+</html>

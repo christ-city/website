@@ -1,0 +1,165 @@
+{% extends "outreach/base.html" %}
+{% load static %}
+
+{% block title %}About Us - Christ City Global Outreach{% endblock %}
+
+{% block content %}
+<!-- 🎓 Christ City Mission School Section -->
+<section class="school-section">
+    <div class="container">
+        <div class="school-content">
+            
+            <!-- Left: School Name -->
+            <div class="school-left">
+                <h2>CHRIST CITY MISSION SCHOOL</h2>
+            </div>
+
+            <!-- Center: "Presents" -->
+            <div class="school-center">
+                <h3>PRESENTS</h3>
+            </div>
+
+            <!-- Right: Impact Statement -->
+            <div class="school-text">
+                <h2 class="impact-title">MAKE A DIFFERENCE IN THE LIVES OF CHILDREN IN NEED</h2>
+                <p class="impact-subtitle">Help support the education of children across Nigeria.</p>
+                
+                <!-- 🟡 Donate Button -->
+                <a href="{% url 'donate2' %}" class="btn-donate">Donate Now</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section>
+    <!-- 🔹 Full-Width Section Divider -->
+<div class="section-divider divider4"></div>
+
+  </section>
+
+<!-- 🌟 Join Christ City Family Section -->
+<section class="join-family-section">
+    <div class="container">
+        <div class="join-family-content">
+            
+            <!-- Left: Large Oval Image -->
+            <div class="join-family-image">
+                <img src="{% static 'img/dummies/family-img.jpg' %}" alt="Join Christ City" class="oval-image">
+            </div>
+
+            <!-- Right: Text Content -->
+            <div class="join-family-text">
+                
+                <!-- 🔵 Button: "Join Christ City Family" -->
+                <a href="{% url 'contact' %}" class="btn-join">Join Christ City Family</a>
+
+                <!-- 📝 Text Section -->
+                <h2>Be a Part of Something Greater</h2>
+                <p>
+                    At Christ City Global Outreach, we are more than a charity—we are a family. 
+                    A family of believers, volunteers, and supporters committed to changing lives, 
+                    one child at a time. Together, we can provide education, mentorship, and a 
+                    brighter future for underprivileged children. Come and be part of our mission!
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section>
+    <!-- 🔹 Full-Width Section Divider -->
+<div class="section-divider divider4"></div>
+
+  </section>
+  <section class="mission-school">
+    <div class="container">
+        <!-- Vibrant Title -->
+        <h2 class="section-title">🌟 Christ City Mission School 🌟</h2>
+        
+        <!-- Subtitle -->
+        <p class="section-subtitle">
+            We bring education to orphans and underprivileged children.
+        </p>
+
+        <!-- Large Text Box -->
+        <div class="text-box">
+            <p>
+                Currently, we provide free tuition for 180 pupils at our temporary site while we eagerly anticipate the move to our permanent location upon its construction. This transition will allow us to expand both the primary and secondary sections, opening our doors to even more students.
+
+We are proud to introduce our school, which is dedicated to educating underprivileged children in the FHA community, Abuja, FCT, Nigeria. Our mission is simple but critical: to ensure that every child, regardless of their background, has access to quality education.
+
+In today’s world, it is more important than ever to invest in the education of less fortunate children. Historically, children from poor backgrounds were often left to suffer unimaginable hardships, from genital mutilation to abuse and slavery. We aim to change that narrative.
+
+Our Mission: Transforming Lives Through Free Education
+We embarked on this journey of providing free education to underprivileged children in our community to break the cycle of illiteracy, poverty, and exploitation. By offering these children a chance to learn, we are not only building their futures but also increasing productivity and fostering prosperity in our community.
+
+​
+
+Our Vision: Empowering the Marginalized
+Our vision is to reduce illiteracy in marginalized communities throughout Nigeria. We believe that education is the key to social equality and to improving the overall quality of life. We want to give every child the tools to realize their potential, regardless of their socioeconomic status.
+
+​
+
+Our Objectives: Building Bright Futures
+Academic Impact: Provide a strong academic foundation to underprivileged children.
+
+Protecting Rights: Safeguard the rights of children through education and advocacy.
+
+Talent Development: Unleash the hidden talents, skills, and career potential of every child we serve.
+
+Global Integration: Equip them with the knowledge and skills necessary to thrive in a globalized world.
+
+Civic Responsibility: Inspire them to become responsible, contributing citizens who will influence prosperity in their communities. 
+
+Challenges and Opportunities
+As word of our work has spread, we've seen an influx of new pupils, pushing our current capacity to its limits. While we are equipped to handle 108 students, the arrival of 72 additional pupils has created an urgent need for increased resources and infrastructure. We believe that with your support, we can overcome these challenges and continue to grow.
+
+ 
+
+Why Your Support Matters
+
+By supporting our cause, you will be helping to reshape the future of hundreds of children who would otherwise be left behind. Together, we can create opportunities, transform lives, and build a better future for these children and the entire community.
+
+We invite you to join us on this meaningful journey of education, empowerment, and transformation. With your help, we can expand our reach, improve our facilities, and provide even more children with the education they deserve.
+            </p>
+        </div>
+
+        <!-- Fancy Button -->
+        <a href="#" class="btn-view-projects">View Our Ongoing Projects</a>
+    </div>
+</section>
+<section>
+    <!-- 🔹 Full-Width Section Divider -->
+<div class="section-divider divider4"></div>
+
+  </section>
+
+  <section class="donate-section">
+    <div class="container">
+        <!-- Fancy Donate Button -->
+        <a href="{% url 'donate2' %}" class="btn-donate"> Donate 💖</a>
+
+        <!-- Image Container -->
+        <div class="image-container">
+            <img src="{% static 'img/dummies/grate-img.jpg' %}" alt="Helping Children" class="rounded-img">
+            <img src="{% static 'img/dummies/grate2-img.jpg' %}" alt="Education Support" class="rounded-img">
+        </div>
+
+        <!-- Call-to-Action -->
+        <a href="{% url 'contact' %}" class="cta-link">Join us in shaping the future — become a partner today and make a lasting impact!</a>
+    </div>
+</section>
+<section>
+    <!-- 🔹 Full-Width Section Divider -->
+<div class="section-divider divider4"></div>
+
+  </section>
+
+
+
+
+{% endblock %}
+
+
+
+

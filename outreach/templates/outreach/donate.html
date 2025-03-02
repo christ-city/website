@@ -1,0 +1,123 @@
+{% extends "outreach/base.html" %}
+{% load static %}
+
+{% block content %}
+<section id="inner-headline">
+  <div class="container">
+    <div class="row">
+      <div class="span4">
+        <div class="inner-heading">
+          <h2>Make a Difference</h2>
+        </div>
+      </div>
+      <div class="span8">
+        <ul class="breadcrumb">
+          <li><a href="{% url 'index' %}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+          <li class="active">Donate</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="content">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <h4>Choose Your <strong>Donation Plan</strong></h4>
+      </div>
+
+      <!-- One-Time Donation -->
+      <div class="span4">
+        <div class="pricing-box-alt donation-box" data-type="one-time">
+          <div class="pricing-heading">
+            <h3>One-Time <strong>Gift</strong></h3>
+          </div>
+          <div class="pricing-terms">
+            <h6>Custom Amount</h6>
+          </div>
+          <div class="pricing-content">
+            <ul>
+              <li><i class="icon-ok"></i> Make an immediate impact</li>
+              <li><i class="icon-ok"></i> Flexible donation amount</li>
+              <li><i class="icon-ok"></i> Tax-deductible contribution</li>
+            </ul>
+          </div>
+          <div class="pricing-action">
+            <form method="POST" action="{% url 'process_donation' %}">
+              {% csrf_token %}
+              <input type="hidden" name="donation_type" value="one-time">
+              <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
+              <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Monthly Donation -->
+      <div class="span4">
+        <div class="pricing-box-alt special donation-box" data-type="monthly">
+          <div class="pricing-heading">
+            <h3>Monthly <strong>Support</strong></h3>
+          </div>
+          <div class="pricing-terms">
+            <h6>$30.00 / Month</h6>
+          </div>
+          <div class="pricing-content">
+            <ul>
+              <li><i class="icon-ok"></i> Provide continuous help</li>
+              <li><i class="icon-ok"></i> Cancel anytime</li>
+              <li><i class="icon-ok"></i> Become a sponsor</li>
+            </ul>
+          </div>
+          <div class="pricing-action">
+            <form method="POST" action="{% url 'process_donation' %}">
+              {% csrf_token %}
+              <input type="hidden" name="donation_type" value="monthly">
+              <input type="number" name="amount" class="donation-input" value="30" readonly>
+              <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Major Giving -->
+      <div class="span4">
+        <div class="pricing-box-alt donation-box" data-type="major">
+          <div class="pricing-heading">
+            <h3>Major <strong>Giving</strong></h3>
+          </div>
+          <div class="pricing-terms">
+            <h6>$500+ Contribution</h6>
+          </div>
+          <div class="pricing-content">
+            <ul>
+              <li><i class="icon-ok"></i> Legacy-level donation</li>
+              <li><i class="icon-ok"></i> Sponsor a full project</li>
+              <li><i class="icon-ok"></i> VIP recognition</li>
+            </ul>
+          </div>
+          <div class="pricing-action">
+            <form method="POST" action="{% url 'process_donation' %}">
+              {% csrf_token %}
+              <input type="hidden" name="donation_type" value="major">
+              <input type="number" name="amount" class="donation-input" value="500" readonly>
+              <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="row">
+      <div class="span12">
+        <div class="solidline"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+
+<script src="{% static 'js/script2.js' %}"></script>

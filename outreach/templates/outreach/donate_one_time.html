@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Donation</title>
+    <link rel="stylesheet" href="{% static 'css/donate.css' %}">
+</head>
+<body>
+
+    <!-- Page Header -->
+    <section id="inner-headline">
+        <div class="container">
+          <div class="row">
+            <div class="span4">
+              <div class="inner-heading">
+                <h2>Make a Difference</h2>
+              </div>
+            </div>
+            <div class="span8">
+              <ul class="breadcrumb">
+                <li><a href="{% url 'index' %}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                <li class="active">Donate</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="content">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <h4>Choose Your <strong> ONE TIME Donation</strong></h4>
+                </div>
+            </div>
+
+            <!-- Donation Plans -->
+            <div class="donation-row">
+                
+                <!-- One-Time Donation -->
+                <div class="pricing-box-alt donation-box" data-type="one-time">
+                    <div class="pricing-heading">
+                        <h3>Become <strong>A Partner</strong></h3>
+                    </div>
+                    <div class="pricing-terms">
+                        <h6>Input Preffered Amount</h6>
+                    </div>
+                    <div class="pricing-content">
+                        <ul>
+                            <li>🩺 Funds healthcare checkups for an entire orphanage.</li>
+                            <li>🍲 Provides emergency food support for struggling families.</li>
+                            <li>🛠️ Funds vocational training programs for underprivileged youth.</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-action">
+                        <form id="donation-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="donation_type" value="one-time">
+                            <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
+                            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Monthly Donation -->
+                <div class="pricing-box-alt special donation-box" data-type="monthly">
+                    <div class="pricing-heading">
+                        <h3><strong>Empower a Classroom</strong></h3>
+                    </div>
+                    <div class="pricing-terms">
+                        <h6>$250</h6>
+                    </div>
+                    <div class="pricing-content">
+                        <ul>
+                            <li>📚 Provides schoolbooks & supplies for <strong>30 children</strong> for one month.</li>
+                            <li>👕 Covers uniforms, socks, books, textbooks and sweaters for students.</li>
+                            <li>🍎 Supports a month of school meals for underprivileged children.</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-action">
+                        <form id="donation-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="donation_type" value="one-time">
+                            <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
+                            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Major Giving -->
+                <div class="pricing-box-alt donation-box" data-type="major">
+                    <div class="pricing-heading">
+                        <h3>Major help <strong>Train 30 Kids for an Entire Term</strong></h3>
+                    </div>
+                    <div class="pricing-terms">
+                        <h6>$1000</h6>
+                    </div>
+                    <div class="pricing-content">
+                        <ul>
+                            <li>📖 Covers tuition, books, and feeding for <strong>30 children</strong> for an entire term.</li>
+                            <li>🏡 Provides temporary shelter for children without homes.</li>
+                            <li>📦 Funds a community intervention for disaster relief.</li>
+                            <li>💼 Helps supply new school uniforms & shoes, new items, and school supplies. school excursions and new experiences are provided</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-action">
+                        <form id="donation-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="donation_type" value="one-time">
+                            <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
+                            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Divider -->
+            <div class="row">
+                <div class="span12">
+                    <div class="solidline"></div>
+                </div>
+            </div>
+            <p>
+                <a href="{% url 'index' %}" class="home-btn">← Go Back Home</a>
+            </p>
+        </div>
+    </section>
+
+    <script src="{% static 'js/donate.js' %}"></script>
+    <script>
+        document.getElementById("donation-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent page reload
+        
+            const formData = new FormData(this);
+            fetch("{% url 'process_donation' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect_url; // Redirect to Flutterwave
+                } else {
+                    alert(data.error || "An error occurred. Please try again.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+        </script>
+</body>
+</html>

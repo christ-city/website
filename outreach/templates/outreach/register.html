@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <h2>Create an Account</h2>
+        <p>Join us today and be part of the Christ City family.</p>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password1" placeholder="Password" required>
+        <input type="password" name="password2" placeholder="Confirm Password" required>
+        <button type="submit" class="auth-btn">Register</button>
+    </form>
+
+
+    <p class="toggle-text">Already have an account? <a href="{% url 'login' %}" style="color: #ff6b6b;">Login here</a></p>
+
+
+    <script src="{% static 'js/script2.js' %}"></script>
+    <script>
+        const loginToggle = document.getElementById("login-toggle");
+        const registerToggle = document.getElementById("register-toggle");
+        const authContainer = document.querySelector(".auth-container");
+        
+        loginToggle.addEventListener("click", () => {
+            authContainer.classList.remove("active");
+        });
+        
+        registerToggle.addEventListener("click", () => {
+            authContainer.classList.add("active");
+        });
+    </script>
+
+
+</body>
+</html>

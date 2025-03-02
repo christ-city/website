@@ -1,0 +1,1156 @@
+/* ====== Global Styling ====== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f8fb; /* Light Blue Background */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* ====== Blog Header ====== */
+.blog-header {
+    background: url("../img/header4-bg.jpg") no-repeat center center;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.blog-header h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.blog-header p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* ====== Blog Container Layout ====== */
+.blog-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Ensure elements align at the top */
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    gap: 20px; /* Adds space between main content and sidebar */
+}
+
+/* ====== "Create Blog Post" Button ====== */
+.create-post-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.create-post-btn {
+    background: #ff5733;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s;
+}
+
+.create-post-btn:hover {
+    background: #1e3c72;
+}
+
+/* ====== Main Blog Posts ====== */
+.blog-main {
+    flex: 2.5;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ====== Updated Blog Post Layout ====== */
+.blog-post {
+    display: flex;
+    align-items: flex-start;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.blog-post:hover {
+    transform: translateY(-5px);
+}
+
+.blog-post-img {
+    width: 40%; /* Adjust width for proper positioning */
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.blog-post-content {
+    width: 60%; /* Adjust width to align with the image */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Ensuring text remains aligned and readable */
+.blog-post-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.blog-post-content h2 a {
+    text-decoration: none;
+    color: #1e3c72;
+    transition: color 0.3s ease;
+}
+
+.blog-post-content h2 a:hover {
+    color: #ff5733; /* Orange Hover Effect */
+}
+
+.blog-meta {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.read-more {
+    display: inline-block;
+    background: #1e3c72;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+    align-self: flex-start;
+}
+
+.read-more:hover {
+    background: #ff5733;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .blog-post {
+        flex-direction: column;
+    }
+
+    .blog-post-img {
+        width: 100%;
+        height: 220px;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .blog-post-content {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+/* ====== Sidebar ====== */
+.blog-sidebar {
+    flex: 1;
+    background: #2a7058; /* Jade Green */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    position: sticky;
+    top: 20px; /* Keeps sidebar visible while scrolling */
+    align-self: flex-start; /* Ensures it starts at the top */
+}
+
+/* ====== Responsive Adjustments for Sidebar ====== */
+@media (max-width: 768px) {
+    .blog-container {
+        flex-direction: column;
+    }
+
+    .blog-main {
+        width: 100%;
+        order: 1;
+    }
+
+    .blog-sidebar {
+        width: 100%;
+        order: 2;
+        margin-top: 20px;
+        position: relative; /* Removes sticky on mobile */
+    }
+}
+
+/* ====== Sidebar Widgets ====== */
+.sidebar-widget {
+    margin-bottom: 30px;
+}
+
+.sidebar-widget h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+}
+
+.sidebar-search {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.sidebar-widget ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-widget ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar-widget ul li a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.sidebar-widget ul li a:hover {
+    opacity: 0.8;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+    .blog-container {
+        flex-direction: column;
+    }
+
+    .blog-main {
+        order: 1;
+    }
+
+    .blog-sidebar {
+        order: 2;
+        margin-top: 20px;
+        position: relative;
+    }
+
+    .create-post-container {
+        justify-content: center;
+    }
+}
+
+
+.create-post-btn {
+    display: block;
+    background: #ff5733;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.create-post-btn:hover {
+    background: #1e3c72;
+}
+
+/* ====== Form Container ====== */
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Add a subtle hover effect */
+.form-container:hover {
+    transform: translateY(-5px);
+}
+
+/* ====== Form Heading ====== */
+.form-container h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1e3c72;
+}
+
+/* ====== Form Styling ====== */
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Style form labels */
+.form-container label {
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Style form inputs */
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container textarea,
+.form-container select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Add focus effect */
+.form-container input:focus,
+.form-container textarea:focus,
+.form-container select:focus {
+    border-color: #1e3c72;
+    outline: none;
+    box-shadow: 0 0 5px rgba(30, 60, 114, 0.2);
+}
+
+/* ====== File Upload Styling ====== */
+.form-container input[type="file"] {
+    border: none;
+    padding: 10px;
+    background: #f4f8fb;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.form-container input[type="file"]:hover {
+    background: #e3ecf3;
+}
+
+/* ====== Submit Button Styling ====== */
+.form-container button {
+    background: #ff5733;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+/* Hover & Active Effect */
+.form-container button:hover {
+    background: #1e3c72;
+}
+
+.form-container button:active {
+    transform: scale(0.98);
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+/* ====== Page Title Styling ====== */
+.page-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 20px;
+    color: white;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Add a hover effect for interactivity */
+.page-title:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Add a subtle fade-in effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-title {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 26px;
+        padding: 15px;
+    }
+}
+.home-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+    background: #1e3c72;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.home-btn:hover {
+    background: #2a5298;
+    transform: scale(1.05);
+}
+
+.home-btn:active {
+    transform: scale(0.95);
+}
+/* ====== Blog Post Page Styling ====== */
+.post-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* ====== Blog Post Content ====== */
+.post-content {
+    flex: 2.5;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Post Image Container */
+.post-image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.post-main-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Post Text */
+.post-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* ====== Sidebar ====== */
+.blog-sidebar {
+    flex: 1;
+    background: #2a7058; /* Jade Green */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+/* Sidebar Widgets */
+.sidebar-widget {
+    margin-bottom: 30px;
+}
+
+.sidebar-widget h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+}
+
+.sidebar-widget ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-widget ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar-widget ul li a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.sidebar-widget ul li a:hover {
+    opacity: 0.8;
+}
+
+/* ====== Back to Blog Button ====== */
+.back-to-blog-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-to-blog-btn {
+    display: inline-block;
+    background: #1e3c72;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.back-to-blog-btn:hover {
+    background: #ff5733;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+    .post-container {
+        flex-direction: column;
+    }
+
+    .blog-sidebar {
+        margin-top: 20px;
+        position: relative;
+    }
+}
+/* ====== Blog Post Content ====== */
+.post-content {
+    flex: 2.5;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ====== Post Text (Enhanced Readability) ====== */
+.post-text {
+    background: linear-gradient(135deg, #fefefe, #f4f8fb); /* Soft gradient background */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
+    font-family: "Merriweather", serif; /* Beautiful reading font */
+    text-align: justify;
+    letter-spacing: 0.3px;
+    word-spacing: 1.5px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Add subtle animation */
+.post-text:hover {
+    background: linear-gradient(135deg, #ffffff, #eef3f7);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ====== Post Image Styling ====== */
+/* ====== Post Image Container (Side by Side with Frame) ====== */
+.post-image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px; /* Adds spacing between images */
+    margin-bottom: 20px;
+}
+
+/* ====== Individual Post Image Styling ====== */
+.post-main-img {
+    width: 45%; /* Adjust width for side-by-side layout */
+    height: 250px;
+    max-height: 300px; /* Keeps image size consistent */
+    border: 6px solid #611aa3; /* Soft border for frame effect */
+    border-radius: 12px; /* Slightly rounded edges */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Elevation effect */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Subtle hover effect to make the frame interactive */
+.post-main-img:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ====== Responsive Design (Stack images on small screens) ====== */
+@media (max-width: 768px) {
+    .post-image-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .post-main-img {
+        width: 80%; /* Make it larger on mobile */
+    }
+}
+
+
+/* ====== Sidebar Styling ====== */
+.blog-sidebar {
+    flex: 1;
+    background: #2a7058; /* Jade Green */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+/* ====== Sidebar Widgets ====== */
+.sidebar-widget {
+    margin-bottom: 30px;
+}
+
+.sidebar-widget h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+}
+
+.sidebar-widget ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-widget ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar-widget ul li a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.sidebar-widget ul li a:hover {
+    opacity: 0.8;
+}
+
+/* ====== Back to Blog Button ====== */
+.back-to-blog-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-to-blog-btn {
+    display: inline-block;
+    background: #1e3c72;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.back-to-blog-btn:hover {
+    background: #ff5733;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+    .post-container {
+        flex-direction: column;
+    }
+
+    .blog-sidebar {
+        margin-top: 20px;
+        position: relative;
+    }
+}
+/* ====== Like Button ====== */
+.like-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.like-btn {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #e74c3c; /* Red heart */
+    transition: transform 0.2s;
+}
+
+.like-btn:hover {
+    transform: scale(1.1);
+}
+
+/* ====== Comments Section ====== */
+.comments-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comments-section h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #1e3c72;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.comment {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}
+
+.comment p {
+    margin: 5px 0;
+}
+
+#comment-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+#comment-text {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#comment-form button {
+    background: #1e3c72;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#comment-form button:hover {
+    background: #ff5733;
+}
+
+
+.comments-list {
+    margin-top: 20px;
+}
+
+.comment {
+    background: #f4f4f4;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+/* === Top Header Styling === */
+.top-header {
+    background: url("../img/plain-bg3.jpg") no-repeat center center;
+    background-size: cover;
+    padding: 10px 20px; /* Reduced padding for a slimmer header */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px; /* Fixed height for a compact header */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border for separation */
+  }
+  
+  /* User Info Styling */
+  .user-info {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  /* Highlight & Hover for Username */
+  .user-highlight {
+    background-color: #ffdd57; /* Yellow highlight */
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #333;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .user-highlight:hover {
+    background-color: #ffbb33; /* Darker yellow on hover */
+  }
+  
+  /* Organization Name & Logo */
+  .org-name {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+  }
+  
+  /* Logo Image */
+  .logo-img {
+    height: 50px;
+    margin-right: 10px;
+    animation: e_bounce 2s infinite; /* Bounce animation */
+    transition: transform 0.3s ease; /* Smooth transition for hover */
+  }
+  
+  /* Hover Effect for Logo */
+  .logo-img:hover {
+    animation-play-state: paused; /* Pause animation on hover */
+    transform: scale(1.1); /* Optional: Add a slight scale effect on hover */
+    transform: scale(1.2); /* Slight zoom on hover */
+  }
+  
+  /* Clickable Organization Name & Logo */
+  .org-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .org-link h1 {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* Hover Effect for Organization Name */
+  .org-link:hover h1 {
+    color: #ffdd57;
+  }
+  
+  .top-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .top-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Left: User Info */
+  .user-info {
+    font-size: 14px;
+  }
+  
+  /* Right: Organization Name */
+  .org-name {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .top-header .logo img {
+    height: 60px;
+    margin-right: 15px;
+  }
+  
+  .top-header .logo h1 {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .auth-buttons a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+  
+  .auth-buttons .btn-primary {
+    background: #007bff;
+  }
+  
+  .auth-buttons .btn-success {
+    background: #28a745;
+  }
+  
+  .auth-buttons .btn-danger {
+    background: #dc3545;
+  }
+  
+  /* === Bottom Navigation Bar === */
+  .navbar {
+    background: url("../img/nav-bg.jpg") no-repeat center center;
+    background-size: cover;
+    padding: 15px 0;
+    text-align: center;
+  }
+  
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .nav-links li {
+    margin: 0 15px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #f8d210;
+  }
+  
+  /* === Modal Styling === */
+  .modal .modal-header {
+    background: #007bff;
+    color: white;
+  }
+  
+  .modal .modal-body {
+    padding: 20px;
+  }
+  
+  .modal input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  /* 🟡 Fix Bottom Header */
+  .bottom-header {
+    background-image: url("../img/header2-bg.png");
+    justify-content: flex-end;
+    background-size: cover;
+    padding: 10px 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  /* Ensure Text is Visible */
+  .bottom-header a,
+  .nav-links a {
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end; /* Pushes links to the right */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; 
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .nav-links a:hover {
+    color: yellow;
+  }
+  
+  .bottom-header .nav-links {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .bottom-header .nav-links li {
+    margin-right: 15px;
+  }
+  
+  .bottom-header .nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .bottom-header .nav-links li a:hover {
+    color: yellow; /* Change color on hover */
+  }
+
+/* ====== Comment Section Container ====== */
+.comment-section {
+    max-height: 400px; /* Limit height to allow scrolling */
+    overflow-y: auto;
+    padding: 16px;
+    background: linear-gradient(135deg, #e6f0ff, #fdfbff); /* Unique gradient background */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+/* ====== Individual Comment (Message Bubble Style) ====== */
+.comment {
+    display: flex;
+    align-items: flex-start;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    max-width: 85%; /* Makes it like a chat bubble */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+/* Add a tail to the comment bubble */
+.comment::before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 15px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #ffffff;
+}
+
+/* Make alternate comments align differently (for a chat-like feel) */
+.comment:nth-child(even) {
+    background: #e0edff; /* Light blue for alternating messages */
+    margin-left: auto; /* Right align alternate comments */
+}
+
+.comment:nth-child(even)::before {
+    left: auto;
+    right: 15px;
+    border-top-color: #e0edff;
+}
+
+/* Add hover effect */
+.comment:hover {
+    transform: translateY(-3px);
+}
+
+/* ====== Comment Author ====== */
+.comment-author {
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 4px;
+}
+
+/* ====== Comment Timestamp ====== */
+.comment-time {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-bottom: 8px;
+}
+
+/* ====== Comment Content ====== */
+.comment-content {
+    color: #4b5563;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+/* ====== New Comment Animation ====== */
+@keyframes commentAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.comment-new {
+    animation: commentAppear 0.3s ease-out forwards;
+}
+
+/* ====== Smooth Scrolling for Comments ====== */
+.comment-section {
+    scroll-behavior: smooth;
+}
+
+/* ====== Scrollbar Styling (Modern & Sleek) ====== */
+.comment-section::-webkit-scrollbar {
+    width: 8px;
+}
+
+.comment-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.comment-section::-webkit-scrollbar-thumb {
+    background: #6c8cff;
+    border-radius: 10px;
+}
+
+.comment-section::-webkit-scrollbar-thumb:hover {
+    background: #4b6eff;
+}
+
+/* ====== Responsive Adjustments ====== */
+@media (max-width: 768px) {
+    .comment {
+        max-width: 100%;
+    }
+}

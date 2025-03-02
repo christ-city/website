@@ -1,0 +1,77 @@
+{% extends "outreach/base.html" %}
+{% load static %}
+
+{% block title %}contact Us - Christ City Global Outreach{% endblock %}
+
+{% block content %}
+<section id="inner-headline">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="inner-heading">
+          <h2>📩 Get in Touch</h2>
+          <p>Have a question or want to support our mission? Reach out to us anytime!</p>
+        </div>
+      </div>
+      <div class="col-md-6 text-end breadcrumb-container">
+        <ul class="breadcrumb">
+          <li><a href="{% url 'index' %}"><i class="icon-home"></i> Home</a> <i class="icon-angle-right"></i></li>
+          <li class="active">Contact</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 📍 Google Map -->
+<div class="map-container">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63057.38539950073!2d7.340170714811102!3d8.964168905226556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e7243aaaaaaab%3A0xc004bba551cab85e!2sCHRIST%20CITY%20GLOBAL!5e0!3m2!1sen!2sng!4v1739715036850!5m2!1sen!2sng" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+    width="100%" 
+    height="400" 
+    frameborder="0" 
+    allowfullscreen>
+  </iframe>
+</div>
+<section>
+  <!-- 🔹 Full-Width Section Divider -->
+<div class="section-divider divider4"></div>
+
+</section>
+
+<!-- ✉️ Contact Form Section -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <h4>Get in touch with us by filling <strong>contact form below</strong></h4>
+
+       <!-- Success Message -->
+{% if messages %}
+<div class="alert alert-success">
+  {% for message in messages %}
+    {{ message }}
+  {% endfor %}
+</div>
+{% endif %}
+
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}  <!-- This ensures fields match the Django form properly -->
+  
+  <div class="text-center">
+      <button class="btn btn-contact" type="submit">Submit Message</button>
+  </div>
+</form>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <!-- 🔹 Full-Width Section Divider -->
+<div class="section-divider divider2"></div>
+
+</section>
+
+{% endblock %}

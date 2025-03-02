@@ -1,0 +1,172 @@
+/* ======= Modern Glassmorphism Login & Register ======= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url("../img/church-bg.png") no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    justify-content: center;
+    padding: 30px; /* Reduced padding */
+    overflow: hidden; /* Prevents right-side scrolling */
+}
+
+.auth-wrapper {
+    width: 180px;
+    padding: 20px;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.auth-wrapper h2 {
+    font-size: 24px;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.auth-wrapper p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.auth-input {
+    width: 100%; /* Increased width for better usability */
+    padding: 14px 16px; /* More padding for a comfortable feel */
+    margin: 10px 0; /* Increased margin for spacing */
+    border: 2px solid rgba(255, 255, 255, 0.4); /* Subtle border */
+    border-radius: 10px; /* Slightly more rounded edges */
+    font-size: 18px; /* Increased font size for readability */
+    background: rgba(255, 255, 255, 0.3); /* Softer background */
+    color: white;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Input Focus Effect */
+.auth-input:focus {
+    border: 2px solid white;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Input Placeholder Styling */
+.auth-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px; /* Slightly larger placeholder */
+}
+
+/* Mobile Responsive Fix */
+@media (max-width: 480px) {
+    .auth-input {
+        width: 100%;
+        padding: 14px;
+    }
+}
+
+
+.auth-btn {
+    width: 90%;
+    padding: 12px;
+    background: linear-gradient(90deg, #ff6b6b, #ff8e53);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(255, 107, 107, 0.4);
+}
+
+.auth-btn:hover {
+    background: linear-gradient(90deg, #ff8e53, #ff6b6b);
+    transform: scale(1.05);
+}
+
+.toggle-text {
+    margin-top: 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.toggle-text:hover {
+    text-decoration: underline;
+}
+
+.signup-link {
+    color: #ff6b6b;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+/* 🌟 Alert Messages */
+.alert-messages {
+    background: rgba(255, 87, 87, 0.1);
+    color: #ff6b6b;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 420px) {
+    .auth-wrapper {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .auth-input,
+    .auth-btn {
+        width: 100%;
+    }
+}
+
+/* Go Back Home Button */
+.home-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+    background: #1e3c72;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.home-btn:hover {
+    background: #2a5298;
+    transform: scale(1.05);
+}
+
+.home-btn:active {
+    transform: scale(0.95);
+}
+
