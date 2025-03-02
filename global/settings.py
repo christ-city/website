@@ -182,20 +182,12 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 
-
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'email',
     'profile',
     'openid',
 ]
 
-GOOGLE_API_KEY = 'AIzaSyCT03zy5iBxqM0gEIfJBhhB187PT0zdCHM'
-
-# Flutterwave API Keys
-FLW_PUBLIC_KEY = "FLWPUBK-8159d99fae9d7c196176eea58a7730b6-X"
-FLW_SECRET_KEY = "******"
-FLW_ENCRYPTION_KEY = "******"
-FLW_REDIRECT_URL = "https://yourwebsite.com/donation-confirmation/"
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -203,4 +195,4 @@ EMAIL_HOST = 'smtp.gmail.com'  # Or your email provider's SMTP server
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'your-email@gmail.com'
-EMAIL_HOST_PASSWORD = 'your-app-password'  # Use an app password if using Gmail
+  # Use an app password if using Gmail
