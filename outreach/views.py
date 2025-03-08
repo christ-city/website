@@ -189,7 +189,8 @@ def process_donation(request):
         email = request.user.email
 
         if not amount or float(amount) <= 0:
-            return JsonResponse({"success": False, "error": "Invalid amount"}, status=400)
+            messages.error(request, "Invalid amount. Please enter a valid donation amount.")
+            return redirect("donate")  # Redirect back to donation page
 
         # Create initial donation record (status: pending)
         donation = Donation.objects.create(
@@ -200,13 +201,16 @@ def process_donation(request):
             status="pending"
         )
 
+        # Flutterwave API URL
+        FLUTTERWAVE_URL = "https://api.flutterwave.com/v3/payments"
+
         # Flutterwave Payment Data
         payment_data = {
             "tx_ref": f"donation_{donation.id}",
             "amount": float(amount),
             "currency": "USD",
             "payment_options": "card,banktransfer,ussd",
-            "redirect_url": settings.FLW_REDIRECT_URL,
+            "redirect_url": settings.FLW_REDIRECT_URL,  # Make sure this URL is correct!
             "customer": {
                 "email": email,
                 "name": name,
@@ -217,25 +221,29 @@ def process_donation(request):
             },
         }
 
-        # Make API request to Flutterwave
         headers = {
             "Authorization": f"Bearer {settings.FLW_SECRET_KEY}",
             "Content-Type": "application/json",
         }
-        response = requests.post("https://api.flutterwave.com/v3/payments", json=payment_data, headers=headers)
+
+        response = requests.post(FLUTTERWAVE_URL, json=payment_data, headers=headers)
 
         try:
             res_data = response.json()
-            if res_data.get("status") == "success":
-                return JsonResponse({"success": True, "redirect_url": res_data["data"]["link"]})
-            else:
-                print(f"❌ ERROR: {res_data}")  # Debugging info
-                return JsonResponse({"success": False, "error": res_data["message"]}, status=400)
-        except Exception as e:
-            print(f"❌ Unexpected Error: {str(e)}")  # Debugging info
-            return JsonResponse({"success": False, "error": "Unexpected error occurred"}, status=400)
+            print(f"Flutterwave Response: {res_data}")  # Debugging: Print response
 
-    return JsonResponse({"success": False, "error": "Invalid request"}, status=400)
+            if res_data.get("status") == "success":
+                return redirect(res_data["data"]["link"])  # Redirect user to payment page
+            else:
+                messages.error(request, "Payment initiation failed. Please try again.")
+                return redirect("donate")
+
+        except Exception as e:
+            print(f"ERROR: {str(e)}")  # Debugging: Print error
+            messages.error(request, "Unexpected error occurred. Please try again.")
+            return redirect("donate")
+
+    return redirect("donate")
 
 
 @csrf_exempt
@@ -248,12 +256,15 @@ def flutterwave_webhook(request):
             flw_transaction_id = payload.get("id")  # Transaction ID from Flutterwave
             status = payload.get("status")
 
+            print(f"Received Webhook: {payload}")  # Debugging
+
             # Verify transaction with Flutterwave API
             FLUTTERWAVE_VERIFY_URL = f"https://api.flutterwave.com/v3/transactions/{flw_transaction_id}/verify"
             headers = {"Authorization": f"Bearer {settings.FLW_SECRET_KEY}"}
 
             verify_response = requests.get(FLUTTERWAVE_VERIFY_URL, headers=headers)
             verify_data = verify_response.json()
+            print(f"Verification Response: {verify_data}")  # Debugging
 
             if verify_data.get("status") != "success":
                 return JsonResponse({"error": "Transaction verification failed"}, status=400)
@@ -270,9 +281,11 @@ def flutterwave_webhook(request):
             return JsonResponse({"error": "Payment not successful"}, status=400)
 
         except Exception as e:
+            print(f"Webhook Error: {str(e)}")  # Debugging
             return JsonResponse({"error": str(e)}, status=400)
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
 

@@ -56,11 +56,11 @@
                         </ul>
                     </div>
                     <div class="pricing-action">
-                        <form id="donation-form">
+                        <form id="monthly-donation-form" method="POST" action="{% url 'process_donation' %}">
                             {% csrf_token %}
-                            <input type="hidden" name="donation_type" value="one-time">
+                            <input type="hidden" name="donation_type" value="monthly">
                             <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
-                            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
+                            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Monthly</button>
                         </form>
                     </div>
                 </div>
@@ -81,11 +81,11 @@
                         </ul>
                     </div>
                     <div class="pricing-action">
-                        <form id="donation-form">
+                        <form id="monthly-donation-form" method="POST" action="{% url 'process_donation' %}">
                             {% csrf_token %}
-                            <input type="hidden" name="donation_type" value="one-time">
+                            <input type="hidden" name="donation_type" value="monthly">
                             <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
-                            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
+                            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Monthly</button>
                         </form>
                     </div>
                 </div>
@@ -109,11 +109,11 @@
                         </ul>
                     </div>
                     <div class="pricing-action">
-                        <form id="donation-form">
+                        <form id="monthly-donation-form" method="POST" action="{% url 'process_donation' %}">
                             {% csrf_token %}
-                            <input type="hidden" name="donation_type" value="one-time">
+                            <input type="hidden" name="donation_type" value="monthly">
                             <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
-                            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
+                            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Monthly</button>
                         </form>
                     </div>
                 </div>
@@ -134,27 +134,41 @@
 
     <script src="{% static 'js/donate.js' %}"></script>
     <script>
-        document.getElementById("donation-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent page reload
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll("form").forEach(form => {
+                form.addEventListener("submit", function(event) {
+                    event.preventDefault();  // Prevent default form submission
         
-            const formData = new FormData(this);
-            fetch("{% url 'process_donation' %}", {
-                method: "POST",
-                headers: {
-                    "X-CSRFToken": "{{ csrf_token }}",
-                },
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.href = data.redirect_url; // Redirect to Flutterwave
-                } else {
-                    alert(data.error || "An error occurred. Please try again.");
-                }
-            })
-            .catch(error => console.error("Error:", error));
+                    let formData = new FormData(this);
+                    let submitButton = this.querySelector("button");
+                    submitButton.disabled = true;  // Disable button while processing
+        
+                    fetch("{% url 'process_donation' %}", {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.href = data.redirect_url;  // Redirect to Flutterwave
+                        } else {
+                            alert("Error: " + data.error);  // Show error message
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("An unexpected error occurred.");
+                    })
+                    .finally(() => {
+                        submitButton.disabled = false;  // Re-enable button
+                    });
+                });
+            });
         });
         </script>
+        
 </body>
 </html>
