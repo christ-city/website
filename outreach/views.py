@@ -238,7 +238,7 @@ def process_donation(request):
 
     return JsonResponse({"success": False, "error": "Invalid request"}, status=400)
 
-def donation_confirmation(request):
+def donation_confirm(request):
     transaction_id = request.GET.get('transaction_id')
     tx_ref = request.GET.get('tx_ref')
     status = request.GET.get('status')

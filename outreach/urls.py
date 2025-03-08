@@ -3,7 +3,7 @@ from django.urls import path, include
 from . import views
 from django.contrib.auth.views import LogoutView
 from .views import contact_view, login_view, register_view, logout_view
-from .views import donate_page, process_donation, create_blog_post, flutterwave_webhook, donation_confirmation
+from .views import donate_page, process_donation, create_blog_post, flutterwave_webhook, donation_confirm
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -37,6 +37,6 @@ urlpatterns = [
     path("blog/<int:post_id>/like/", views.like_post, name="like_post"),
     path("blog/<int:post_id>/comment/", views.add_comment, name="add_comment"),
     path("flutterwave-webhook/", views.flutterwave_webhook, name="flutterwave_webhook"),
-    path('donate/confirm/', views.donation_confirmation, name='donation_confirmation'),
+    path('donate/confirm/', views.donation_confirm, name='donation_confirm'),
     
    ]
