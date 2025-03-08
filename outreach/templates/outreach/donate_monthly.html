@@ -55,7 +55,7 @@
                             <li>🛠️ Funds vocational training programs for underprivileged youth.</li>
                         </ul>
                     </div>
-                    <div class="pricing-action">
+                    <div class="donation-box">
                         <form id="monthly-donation-form" method="POST" action="{% url 'process_donation' %}">
                             {% csrf_token %}
                             <input type="hidden" name="donation_type" value="monthly">
@@ -80,7 +80,7 @@
                             <li>🍎 Supports a month of school meals for underprivileged children.</li>
                         </ul>
                     </div>
-                    <div class="pricing-action">
+                    <div class="donation-box">
                         <form id="monthly-donation-form" method="POST" action="{% url 'process_donation' %}">
                             {% csrf_token %}
                             <input type="hidden" name="donation_type" value="monthly">
@@ -108,7 +108,7 @@
                             <li>🎖️ Receive VIP recognition for your legacy-level donation.</li>
                         </ul>
                     </div>
-                    <div class="pricing-action">
+                    <div class="donation-box">
                         <form id="monthly-donation-form" method="POST" action="{% url 'process_donation' %}">
                             {% csrf_token %}
                             <input type="hidden" name="donation_type" value="monthly">
@@ -137,7 +137,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll("form").forEach(form => {
                 form.addEventListener("submit", function(event) {
-                    event.preventDefault();  // Prevent default form submission
+                    event.preventDefault();  // Stop default form submission
         
                     let formData = new FormData(this);
                     let submitButton = this.querySelector("button");
@@ -168,7 +168,7 @@
                 });
             });
         });
-        </script>
+        </script>        
         
 </body>
 </html>
