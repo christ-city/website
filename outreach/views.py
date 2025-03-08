@@ -191,14 +191,13 @@ def process_donation(request):
         if not amount or float(amount) <= 0:
             return JsonResponse({"success": False, "error": "Invalid amount"}, status=400)
 
-        # ✅ Check if Donation model has 'status' field
         try:
             donation = Donation.objects.create(
                 user=request.user,
                 amount=float(amount),
                 donation_type=donation_type,
                 email=email,
-                status="pending"  # ✅ This must exist in the model
+                status="pending"
             )
         except TypeError:
             return JsonResponse({"success": False, "error": "Model error - Missing 'status' field"}, status=400)
@@ -225,16 +224,19 @@ def process_donation(request):
             "Authorization": f"Bearer {settings.FLW_SECRET_KEY}",
             "Content-Type": "application/json",
         }
+
         response = requests.post("https://api.flutterwave.com/v3/payments", json=payment_data, headers=headers)
 
         try:
             res_data = response.json()
+            print("Flutterwave Response:", res_data)  # ✅ LOGGING API RESPONSE
+
             if res_data.get("status") == "success":
                 return JsonResponse({"success": True, "redirect_url": res_data["data"]["link"]})
             else:
-                return JsonResponse({"success": False, "error": "Payment initiation failed"}, status=400)
-        except Exception:
-            return JsonResponse({"success": False, "error": "Unexpected error occurred"}, status=400)
+                return JsonResponse({"success": False, "error": f"Payment initiation failed: {res_data}"}, status=400)
+        except Exception as e:
+            return JsonResponse({"success": False, "error": f"Unexpected error: {str(e)}"}, status=400)
 
     return JsonResponse({"success": False, "error": "Invalid request"}, status=400)
 
