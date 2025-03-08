@@ -86,7 +86,7 @@
 </header>
 <!-- Bottom Navigation Bar -->
 <nav class="bottom-header">
-    <div class="container">
+  <div class="menu-toggle" id="menu-toggle">☰ Menu</div>
         <ul class="nav-links">
             <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About us <i class="icon-angle-down"></i></a></li>
@@ -643,6 +643,16 @@ document.addEventListener("click", function (e) {
     }
 });
 });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.getElementById("menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+  
+        menuToggle.addEventListener("click", function () {
+            navLinks.classList.toggle("menu-open");
+        });
+    });
   </script>
 
 </body>

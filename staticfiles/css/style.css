@@ -185,6 +185,29 @@ a:active {
 .auth-buttons .btn-danger {
   background: #dc3545;
 }
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    text-align: center;
+    height: auto;
+    padding: 10px;
+  }
+
+  .org-name {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo-img {
+    height: 40px; /* Adjust logo size for mobile */
+    margin-bottom: 5px;
+  }
+
+  .auth-buttons {
+    margin-top: 10px;
+  }
+}
+
 
 /* === Bottom Navigation Bar === */
 .navbar {
@@ -217,6 +240,17 @@ a:active {
 .nav-links a:hover {
   color: #f8d210;
 }
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav-links li {
+    margin-bottom: 10px;
+  }
+}
+
 
 /* === Modal Styling === */
 .modal .modal-header {
@@ -287,6 +321,48 @@ a:active {
 
 .bottom-header .nav-links li a:hover {
   color: yellow; /* Change color on hover */
+}
+/* Mobile Navigation (Hamburger Menu) */
+@media (max-width: 768px) {
+  .bottom-header {
+      position: relative;
+  }
+
+  .nav-links {
+      display: none;
+      flex-direction: column;
+      text-align: center;
+      background: #333;
+      position: absolute;
+      width: 100%;
+      top: 50px;
+      left: 0;
+      z-index: 1000;
+      padding: 10px 0;
+  }
+
+  .nav-links li {
+      margin-bottom: 10px;
+  }
+
+  .nav-links a {
+      padding: 10px;
+      display: block;
+  }
+
+  .menu-toggle {
+      display: block;
+      text-align: center;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      padding: 10px;
+  }
+
+  /* Show menu when toggled */
+  .menu-open .nav-links {
+      display: flex;
+  }
 }
 
 
@@ -877,13 +953,6 @@ header ul.nav li ul li ul {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.da-slide .da-img img {
-  max-width: 500px; /* Increase image size */
-  height: auto;
-  transition: transform 0.3s ease-in-out;
-}
-
-
 /* READ MORE BUTTON */
 .da-slide .da-link {
   display: inline-block;
@@ -917,7 +986,7 @@ header ul.nav li ul li ul {
 }
 
 .da-slide .da-img img {
-  max-width: 450px;
+  max-width: 100%;
   height: auto;
   transition: transform 0.4s ease-in-out;
   border-radius: 10px;
@@ -940,6 +1009,50 @@ body, html {
 }
 
 /* === RESPONSIVE DESIGN FIXES === */
+/* Adjust Navigation Arrows for Mobile */
+@media (max-width: 768px) {
+  .da-slider {
+      height: auto;
+      padding-bottom: 20px;
+  }
+
+  .da-slide {
+      padding: 15px;
+  }
+
+  .da-slide h2 {
+      font-size: 20px;
+  }
+
+  .da-slide p {
+      font-size: 14px;
+      max-width: 90%;
+  }
+
+  .da-img img {
+      max-width: 80%;
+  }
+
+  /* Position Arrows on Mobile */
+  .da-arrows {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0 10px;
+  }
+
+  .da-arrows span {
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   .da-slider {
     height: 450px;
@@ -2228,6 +2341,16 @@ ul.social-network li {
 #sub-footer ul.social-network {
   float: right;
 }
+@media (max-width: 480px) {
+  footer {
+    text-align: center;
+  }
+
+  .footer-links {
+    flex-direction: column;
+  }
+}
+
 
 
 
