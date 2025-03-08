@@ -268,7 +268,9 @@ a:active {
   margin: 10px 0;
 }
 
-/* 🟡 Fix Bottom Header */
+/* ===============================
+   Desktop Navigation (Default)
+================================ */
 .bottom-header {
   background-image: url("../img/header2-bg.png");
   justify-content: flex-end;
@@ -322,52 +324,68 @@ a:active {
 .bottom-header .nav-links li a:hover {
   color: yellow; /* Change color on hover */
 }
-/* Mobile Navigation (Hamburger Menu) */
+/* ===============================
+   Mobile Navigation (Hamburger)
+================================ */
 @media (max-width: 768px) {
+  /* Adjust container */
   .bottom-header {
-      position: relative;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
   }
 
+  /* Hide menu initially */
   .nav-links {
       display: none;
       flex-direction: column;
       text-align: center;
-      background: #333;
+      background: #222;
       position: absolute;
       width: 100%;
-      top: 50px;
+      top: 60px;
       left: 0;
       z-index: 1000;
       padding: 10px 0;
+      border-top: 2px solid #444;
   }
 
   .nav-links li {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
   }
 
   .nav-links a {
-      padding: 10px;
       display: block;
-  }
-  /* Show menu when toggled */
-  .menu-open {
-    display: flex !important;
+      padding: 12px;
+      font-size: 16px;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
   }
 
-/* Hamburger Icon */
-.menu-toggle {
-    display: block;
-    text-align: center;
-    font-size: 24px;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
-    background: #333;
-    border-radius: 5px;
+  .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+  }
+
+  /* Show menu when toggled */
+  .nav-links.menu-open {
+      display: flex !important;
+  }
+
+  /* Hamburger Icon */
+  .menu-toggle {
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 10px;
+      z-index: 1100;
+      transition: 0.3s;
   }
 }
-
-
 /* ===================================
 2. layout
 ==================================== */
