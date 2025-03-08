@@ -229,8 +229,10 @@ def process_donation(request):
             if res_data.get("status") == "success":
                 return JsonResponse({"success": True, "redirect_url": res_data["data"]["link"]})
             else:
-                return JsonResponse({"success": False, "error": "Payment initiation failed"}, status=400)
-        except Exception:
+                print(f"❌ ERROR: {res_data}")  # Debugging info
+                return JsonResponse({"success": False, "error": res_data["message"]}, status=400)
+        except Exception as e:
+            print(f"❌ Unexpected Error: {str(e)}")  # Debugging info
             return JsonResponse({"success": False, "error": "Unexpected error occurred"}, status=400)
 
     return JsonResponse({"success": False, "error": "Invalid request"}, status=400)
@@ -243,24 +245,35 @@ def flutterwave_webhook(request):
         try:
             payload = json.loads(request.body)
             tx_ref = payload.get("tx_ref")
+            flw_transaction_id = payload.get("id")  # Transaction ID from Flutterwave
             status = payload.get("status")
 
-            # Verify Signature (Flutterwave sends "verif-hash" header)
-            signature = request.headers.get("verif-hash")
-            if not signature or signature != settings.FLW_SECRET_KEY:
-                return JsonResponse({"error": "Invalid signature"}, status=403)
+            # Verify transaction with Flutterwave API
+            FLUTTERWAVE_VERIFY_URL = f"https://api.flutterwave.com/v3/transactions/{flw_transaction_id}/verify"
+            headers = {"Authorization": f"Bearer {settings.FLW_SECRET_KEY}"}
+
+            verify_response = requests.get(FLUTTERWAVE_VERIFY_URL, headers=headers)
+            verify_data = verify_response.json()
+
+            if verify_data.get("status") != "success":
+                return JsonResponse({"error": "Transaction verification failed"}, status=400)
+
+            # Get the actual donation ID from tx_ref
+            donation_id = int(tx_ref.split("_")[1])
+            donation = get_object_or_404(Donation, id=donation_id)
 
             if status == "successful":
-                donation_id = int(tx_ref.split("_")[1])  # Extract donation ID
-                donation = get_object_or_404(Donation, id=donation_id)
                 donation.status = "completed"
                 donation.save()
                 return JsonResponse({"message": "Payment confirmed"}, status=200)
+
+            return JsonResponse({"error": "Payment not successful"}, status=400)
 
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
 def blog_list(request):
