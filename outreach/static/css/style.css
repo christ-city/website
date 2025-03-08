@@ -185,6 +185,29 @@ a:active {
 .auth-buttons .btn-danger {
   background: #dc3545;
 }
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    text-align: center;
+    height: auto;
+    padding: 10px;
+  }
+
+  .org-name {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo-img {
+    height: 40px; /* Adjust logo size for mobile */
+    margin-bottom: 5px;
+  }
+
+  .auth-buttons {
+    margin-top: 10px;
+  }
+}
+
 
 /* === Bottom Navigation Bar === */
 .navbar {
@@ -217,6 +240,17 @@ a:active {
 .nav-links a:hover {
   color: #f8d210;
 }
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav-links li {
+    margin-bottom: 10px;
+  }
+}
+
 
 /* === Modal Styling === */
 .modal .modal-header {
@@ -2228,6 +2262,16 @@ ul.social-network li {
 #sub-footer ul.social-network {
   float: right;
 }
+@media (max-width: 480px) {
+  footer {
+    text-align: center;
+  }
+
+  .footer-links {
+    flex-direction: column;
+  }
+}
+
 
 
 
