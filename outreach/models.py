@@ -100,6 +100,7 @@ class Donation(models.Model):
     donation_type = models.CharField(max_length=10, choices=DONATION_TYPE)
     created_at = models.DateTimeField(auto_now_add=True)
     email = models.EmailField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="pending")  # Added this field
 
     def __str__(self):
         return f"{self.user.username if self.user else 'Guest'} - {self.donation_type} - ${self.amount}"

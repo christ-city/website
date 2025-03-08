@@ -65,8 +65,8 @@ class ContactMessageAdmin(admin.ModelAdmin):
 
 
 class DonationAdmin(admin.ModelAdmin):
-    list_display = ("user", "email", "donation_type", "amount", "created_at")
-    list_filter = ("donation_type", "created_at")
+    list_display = ("user", "email", "donation_type", "amount", "status", "created_at")
+    list_filter = ("donation_type", "status", "created_at")
     search_fields = ("user__username", "email", "amount")
     readonly_fields = ("created_at",)
 

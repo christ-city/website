@@ -189,28 +189,27 @@ def process_donation(request):
         email = request.user.email
 
         if not amount or float(amount) <= 0:
-            messages.error(request, "Invalid amount. Please enter a valid donation amount.")
-            return redirect("donate")  # Redirect back to donation page
+            return JsonResponse({"success": False, "error": "Invalid amount"}, status=400)
 
-        # Create initial donation record (status: pending)
-        donation = Donation.objects.create(
-            user=request.user,
-            amount=float(amount),
-            donation_type=donation_type,
-            email=email,
-            status="pending"
-        )
+        # ✅ Check if Donation model has 'status' field
+        try:
+            donation = Donation.objects.create(
+                user=request.user,
+                amount=float(amount),
+                donation_type=donation_type,
+                email=email,
+                status="pending"  # ✅ This must exist in the model
+            )
+        except TypeError:
+            return JsonResponse({"success": False, "error": "Model error - Missing 'status' field"}, status=400)
 
-        # Flutterwave API URL
-        FLUTTERWAVE_URL = "https://api.flutterwave.com/v3/payments"
-
-        # Flutterwave Payment Data
+        # ✅ Flutterwave Payment Data
         payment_data = {
             "tx_ref": f"donation_{donation.id}",
             "amount": float(amount),
             "currency": "USD",
             "payment_options": "card,banktransfer,ussd",
-            "redirect_url": settings.FLW_REDIRECT_URL,  # Make sure this URL is correct!
+            "redirect_url": settings.FLW_REDIRECT_URL,
             "customer": {
                 "email": email,
                 "name": name,
@@ -221,29 +220,57 @@ def process_donation(request):
             },
         }
 
+        # ✅ Make API request to Flutterwave
         headers = {
             "Authorization": f"Bearer {settings.FLW_SECRET_KEY}",
             "Content-Type": "application/json",
         }
-
-        response = requests.post(FLUTTERWAVE_URL, json=payment_data, headers=headers)
+        response = requests.post("https://api.flutterwave.com/v3/payments", json=payment_data, headers=headers)
 
         try:
             res_data = response.json()
-            print(f"Flutterwave Response: {res_data}")  # Debugging: Print response
-
             if res_data.get("status") == "success":
-                return redirect(res_data["data"]["link"])  # Redirect user to payment page
+                return JsonResponse({"success": True, "redirect_url": res_data["data"]["link"]})
             else:
-                messages.error(request, "Payment initiation failed. Please try again.")
-                return redirect("donate")
+                return JsonResponse({"success": False, "error": "Payment initiation failed"}, status=400)
+        except Exception:
+            return JsonResponse({"success": False, "error": "Unexpected error occurred"}, status=400)
 
+    return JsonResponse({"success": False, "error": "Invalid request"}, status=400)
+
+def donation_confirmation(request):
+    transaction_id = request.GET.get('transaction_id')
+    tx_ref = request.GET.get('tx_ref')
+    status = request.GET.get('status')
+    
+    # If this is a return from Flutterwave with a successful payment
+    if status == 'successful' and tx_ref:
+        try:
+            # Extract the donation ID from tx_ref
+            donation_id = int(tx_ref.split('_')[1])
+            donation = get_object_or_404(Donation, id=donation_id)
+            
+            # Verify with Flutterwave directly
+            headers = {"Authorization": f"Bearer {settings.FLW_SECRET_KEY}"}
+            verify_url = f"https://api.flutterwave.com/v3/transactions/{transaction_id}/verify"
+            
+            response = requests.get(verify_url, headers=headers)
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('status') == 'success' and data.get('data', {}).get('status') == 'successful':
+                    donation.status = 'completed'
+                    donation.save()
+                    messages.success(request, "Thank you! Your donation was successful.")
+                    return redirect('index')  # Redirect to home page after successful payment
+            
+            messages.error(request, "We couldn't verify your payment. Please contact support.")
         except Exception as e:
-            print(f"ERROR: {str(e)}")  # Debugging: Print error
-            messages.error(request, "Unexpected error occurred. Please try again.")
-            return redirect("donate")
+            messages.error(request, f"An error occurred: {str(e)}")
+    else:
+        messages.warning(request, "Your payment wasn't completed. Please try again.")
+    
+    return redirect('donate2')
 
-    return redirect("donate")
 
 
 @csrf_exempt

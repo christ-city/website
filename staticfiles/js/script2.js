@@ -170,3 +170,40 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll("form").forEach(form => {
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();  // Stop default form submission
+
+            let formData = new FormData(this);
+            let submitButton = this.querySelector("button");
+            submitButton.disabled = true;  // Disable button while processing
+
+            fetch("/donate/process/", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect_url;  // ✅ Redirect to Flutterwave
+                } else {
+                    alert("Error: " + data.error);  // Show error message
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An unexpected error occurred.");
+            })
+            .finally(() => {
+                submitButton.disabled = false;  // Re-enable button
+            });
+        });
+    });
+});
+
+
+
