@@ -210,3 +210,17 @@ jQuery(document).ready(function($) {
   Page.init();
 
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  const menuToggle = document.getElementById("menu-toggle");
+  const navLinks = document.getElementById("nav-links");
+  
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", function() {
+      console.log("Menu clicked"); // For debugging
+      navLinks.classList.toggle("menu-open");
+    });
+  } else {
+    console.error("Menu toggle or nav links not found"); // For debugging
+  }
+});

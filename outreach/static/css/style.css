@@ -371,9 +371,8 @@ a:active {
 
   /* Show menu when toggled */
   .nav-links.menu-open {
-      display: flex !important;
+    display: flex !important;
   }
-
   /* Hamburger Icon */
   .menu-toggle {
       font-size: 28px;
