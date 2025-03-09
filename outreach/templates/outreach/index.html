@@ -649,6 +649,46 @@ document.addEventListener("click", function (e) {
 });
 });
   </script>
+
+<script>
+  // Add this after all other scripts
+  $(document).ready(function() {
+      // Check if fancybox is available
+      if (typeof $.fn.fancybox === 'undefined') {
+          console.warn('Fancybox not loaded, attempting to load from CDN');
+          var fancyboxScript = document.createElement('script');
+          fancyboxScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js';
+          document.head.appendChild(fancyboxScript);
+          
+          var fancyboxCSS = document.createElement('link');
+          fancyboxCSS.rel = 'stylesheet';
+          fancyboxCSS.href = 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css';
+          document.head.appendChild(fancyboxCSS);
+          
+          // Re-initialize after a short delay
+          setTimeout(function() {
+              if (typeof $.fn.fancybox !== 'undefined') {
+                  $('.fancybox').fancybox();
+              }
+          }, 1000);
+      }
+      
+      // Check if tooltip is available
+      if (typeof $.fn.tooltip === 'undefined') {
+          console.warn('Bootstrap tooltip not loaded, attempting to load from CDN');
+          var bootstrapScript = document.createElement('script');
+          bootstrapScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js';
+          document.head.appendChild(bootstrapScript);
+          
+          // Re-initialize after a short delay
+          setTimeout(function() {
+              if (typeof $.fn.tooltip !== 'undefined') {
+                  $('[data-toggle="tooltip"]').tooltip();
+              }
+          }, 1000);
+      }
+  });
+  </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
         const menuToggle = document.getElementById("menu-toggle");

@@ -247,3 +247,42 @@ document.addEventListener("DOMContentLoaded", function() {
     console.error("Menu toggle or nav links not found"); // For debugging
   }
 });
+
+// Add this at the beginning of your custom.js
+(function($) {
+  // Check if required plugins are available
+  var checkPlugins = function() {
+      if (typeof $.fn.fancybox === 'undefined') {
+          console.error('Error: Fancybox is not loaded properly!');
+          return false;
+      }
+      if (typeof $.fn.tooltip === 'undefined') {
+          console.error('Error: Bootstrap tooltip is not loaded properly!');
+          return false;
+      }
+      return true;
+  };
+  
+  $(document).ready(function() {
+      // Only initialize plugins if they're available
+      if (checkPlugins()) {
+          // Fancybox initialization
+          if ($.fn.fancybox) {
+              $('.fancybox').fancybox();
+          }
+          
+          // Tooltip initialization
+          if ($.fn.tooltip) {
+              $('[data-toggle="tooltip"]').tooltip();
+          }
+          
+          // Other initializations...
+      }
+      
+      // Menu click can work without plugins
+      $('.navbar .nav > li > a, .navbar .dropdown-menu a').on('click', function() {
+          console.log('Menu clicked');
+          // Handle menu functionality...
+      });
+  });
+})(jQuery); // Pass jQuery to avoid $ conflicts
