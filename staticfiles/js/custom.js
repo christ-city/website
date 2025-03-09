@@ -34,6 +34,15 @@ jQuery(document).ready(function($) {
   })();
 
 
+
+  $(document).ready(function () {
+    if (typeof $.fn.fancybox === "undefined") {
+        console.error("Error: Fancybox is not loaded properly!");
+    } else {
+        $(".fancybox").fancybox(); // Ensure this runs only if Fancybox is loaded
+    }
+});
+
   $('.toggle-link').each(function() {
     $(this).click(function() {
       var state = 'open'; //assume target is closed & needs opening
@@ -209,4 +218,18 @@ jQuery(document).ready(function($) {
 
   Page.init();
 
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const menuToggle = document.getElementById("menu-toggle");
+  const navLinks = document.getElementById("nav-links");
+  
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", function() {
+      console.log("Menu clicked"); // For debugging
+      navLinks.classList.toggle("menu-open");
+    });
+  } else {
+    console.error("Menu toggle or nav links not found"); // For debugging
+  }
 });

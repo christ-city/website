@@ -34,6 +34,15 @@ jQuery(document).ready(function($) {
   })();
 
 
+
+  $(document).ready(function () {
+    if (typeof $.fn.fancybox === "undefined") {
+        console.error("Error: Fancybox is not loaded properly!");
+    } else {
+        $(".fancybox").fancybox(); // Ensure this runs only if Fancybox is loaded
+    }
+});
+
   $('.toggle-link').each(function() {
     $(this).click(function() {
       var state = 'open'; //assume target is closed & needs opening
