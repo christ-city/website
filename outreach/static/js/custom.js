@@ -220,6 +220,20 @@ jQuery(document).ready(function($) {
 
 });
 
+// Replace or update the handler
+$('.navbar .nav > li > a, .navbar .dropdown-menu a').on('click', function(e) {
+  console.log('Menu clicked');
+  var $parent = $(this).parent();
+  
+  // If it's a dropdown toggle, don't navigate immediately
+  if ($parent.hasClass('dropdown-toggle') || $parent.hasClass('dropdown')) {
+      e.preventDefault();
+      $parent.toggleClass('open');
+  } else {
+      // Normal link, allow navigation
+  }
+});
+
 document.addEventListener("DOMContentLoaded", function() {
   const menuToggle = document.getElementById("menu-toggle");
   const navLinks = document.getElementById("nav-links");

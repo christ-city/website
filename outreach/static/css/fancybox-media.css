@@ -1,0 +1,51 @@
+/* Fancy Box Container */
+.fancy-box {
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    padding: 30px;
+    color: #fff; /* White text */
+    text-align: center;
+    max-width: 300px; /* Adjust width as needed */
+    margin: 20px auto; /* Center the box */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover Effect */
+.fancy-box:hover {
+    transform: translateY(-10px); /* Lift the box on hover */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+
+/* Fancy Box Title */
+.fancy-box h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Fancy Box Description */
+.fancy-box p {
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.9; /* Slightly transparent text */
+}
+
+/* Fancy Box Button */
+.fancy-box .btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #fff; /* White background */
+    color: #6a11cb; /* Gradient color for text */
+    border-radius: 25px; /* Rounded button */
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease; /* Smooth button hover effect */
+}
+
+/* Button Hover Effect */
+.fancy-box .btn:hover {
+    background: #6a11cb; /* Gradient color for background */
+    color: #fff; /* White text */
+}
