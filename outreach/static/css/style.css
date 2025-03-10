@@ -315,15 +315,16 @@ a:active {
 }
 
 .bottom-header .nav-links {
-  display: flex;
-  justify-content: flex-end;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
 }
 
 .bottom-header .nav-links li {
-  margin-right: 15px;
+  padding: 10px 20px;
 }
 
 .bottom-header .nav-links li a {
@@ -340,34 +341,27 @@ a:active {
 /* ===============================
    Mobile Navigation
 ================================ */
-@media (max-width: 768px) {
-  /* Adjust container */
-  .bottom-header {
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-  }
+  @media (max-width: 768px) {
+    .bottom-header {
+        padding: 8px 0; /* Reduce padding */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-  .nav-links {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-}
+    .nav-links {
+        flex-direction: row; /* Keep links in one line */
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 
-.nav-links li {
-    padding: 10px 20px;
-}
+    .nav-links li {
+        padding: 5px 10px;
+    }
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    transition: 0.3s;
+    .nav-links a {
+        font-size: 14px; /* Smaller text for mobile */
+    }
 }
 
 .nav-links a:hover {
@@ -387,7 +381,6 @@ a:active {
     .nav-links a {
         font-size: 16px; /* Smaller text on mobile */
     }
-}
 }
 
 @font-face {
