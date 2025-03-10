@@ -34,15 +34,6 @@ jQuery(document).ready(function($) {
   })();
 
 
-
-  $(document).ready(function () {
-    if (typeof $.fn.fancybox === "undefined") {
-        console.error("Error: Fancybox is not loaded properly!");
-    } else {
-        $(".fancybox").fancybox(); // Ensure this runs only if Fancybox is loaded
-    }
-});
-
   $('.toggle-link').each(function() {
     $(this).click(function() {
       var state = 'open'; //assume target is closed & needs opening
@@ -111,23 +102,6 @@ jQuery(document).ready(function($) {
 
   // tooltip
   $('.social-network li a, .options_box .color a').tooltip();
-
-  // fancybox
-  $(".fancybox").fancybox({
-    padding: 0,
-    autoResize: true,
-    beforeShow: function() {
-      this.title = $(this.element).attr('title');
-      this.title = '<h4>' + this.title + '</h4>' + '<p>' + $(this.element).parent().find('img').attr('alt') + '</p>';
-    },
-    helpers: {
-      title: {
-        type: 'inside'
-      },
-    }
-  });
-
-
   //scroll to top
   $(window).scroll(function() {
     if ($(this).scrollTop() > 100) {
