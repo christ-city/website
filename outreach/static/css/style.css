@@ -291,6 +291,8 @@ a:active {
   padding: 10px 0;
   display: flex;
   justify-content: flex-end;
+  border: 5px solid yellow;
+  z-index: 9999 !important;
 }
 
 /* Ensure Text is Visible */
