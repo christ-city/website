@@ -285,31 +285,42 @@ a:active {
 /* ===============================
    Mobile Navigation
 ================================ */
-  /* Fix for Mobile Screens */
-/* === 📱 MOBILE FIX === */
+  /* Hide menu items on mobile and show hamburger icon */
 @media (max-width: 768px) {
-  .bottom-header {
+  .buttom-header ul {
+      display: none;  /* Hide menu */
       flex-direction: column;
+      position: absolute;
+      background-color: #001F3F;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      text-align: center;
       padding: 10px 0;
   }
 
-  .bottom-header .nav-links {
-      flex-direction: column;
-      width: 100%;
-      text-align: center;
+  .buttom-header ul.show {
+      display: flex; /* Show menu when toggled */
   }
 
-  .bottom-header .nav-links li {
-      width: 100%;
-      text-align: center;
-      padding: 8px 0;
-  }
-
-  .bottom-header .nav-links li a {
-      font-size: 14px;
+  .menu-icon {
       display: block;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+      cursor: pointer;
+      font-size: 24px;
+      color: white;
+      margin-right: 20px;
+  }
+}
+
+/* Hide Hamburger Icon by Default */
+.menu-icon {
+  display: none;
+}
+
+/* Show menu icon only on mobile */
+@media (max-width: 768px) {
+  .menu-icon {
+      display: block;
   }
 }
 @font-face {

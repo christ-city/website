@@ -33,6 +33,12 @@ jQuery(document).ready(function($) {
 
   })();
 
+  function toggleMenu() {
+    const nav = document.querySelector(".nav-links");
+    nav.classList.toggle("show");
+}
+
+
 
   $('.toggle-link').each(function() {
     $(this).click(function() {
