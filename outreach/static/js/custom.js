@@ -234,18 +234,23 @@ $('.navbar .nav > li > a, .navbar .dropdown-menu a').on('click', function(e) {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-  const menuToggle = document.getElementById("menu-toggle");
-  const navLinks = document.getElementById("nav-links");
-  
-  if (menuToggle && navLinks) {
-    menuToggle.addEventListener("click", function() {
-      console.log("Menu clicked"); // For debugging
-      navLinks.classList.toggle("menu-open");
-    });
-  } else {
-    console.error("Menu toggle or nav links not found"); // For debugging
-  }
+$(document).ready(function () {
+  $(".menu-toggle").click(function (event) {
+      event.preventDefault(); // Prevents default behavior
+      $(".nav-links").toggleClass("active"); // Toggle menu visibility
+  });
+
+  // Prevent menu from closing when clicking inside
+  $(".nav-links").click(function (event) {
+      event.stopPropagation();
+  });
+
+  // Close menu when clicking outside
+  $(document).click(function (event) {
+      if (!$(event.target).closest(".menu-toggle, .nav-links").length) {
+          $(".nav-links").removeClass("active");
+      }
+  });
 });
 
 // Add this at the beginning of your custom.js
@@ -296,3 +301,27 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   });
 })(jQuery); // Pass jQuery to avoid $ conflicts
+
+document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (menuToggle && navLinks) {
+      menuToggle.addEventListener("click", function () {
+          navLinks.classList.toggle("menu-open");
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener("click", function (event) {
+          if (!menuToggle.contains(event.target) && !navLinks.contains(event.target)) {
+              navLinks.classList.remove("menu-open");
+          }
+      });
+  } else {
+      console.error("Menu toggle or nav links not found");
+  }
+});
+
+
+
+

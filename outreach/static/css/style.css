@@ -351,19 +351,18 @@ a:active {
 
   /* Hide menu initially */
   .nav-links {
-      display: none;
-      flex-direction: column;
-      text-align: center;
-      background: #222;
-      position: absolute;
-      width: 100%;
-      top: 60px;
-      left: 0;
-      z-index: 1000;
-      padding: 10px 0;
-      border-top: 2px solid #444;
-  }
-
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    background: #222;
+    position: absolute;
+    width: 100%;
+    top: 60px;
+    left: 0;
+    z-index: 1000;
+    padding: 10px 0;
+    border-top: 2px solid #444;
+}
   .nav-links li {
       margin-bottom: 15px;
   }
@@ -388,16 +387,29 @@ a:active {
   }
   /* Hamburger Icon */
   .menu-toggle {
-      font-size: 28px;
-      color: white;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 10px;
-      z-index: 1100;
-      transition: 0.3s;
-  }
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+    z-index: 1100;
+    transition: 0.3s;
 }
+}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('/static/font/fontawesome/fontawesome-webfont.woff?v=3.0.1') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CustomIcon';
+  src: url('/static/font/customicon/Icons.woff') format('woff');
+  font-display: swap;
+}
+
 /* ===================================
 2. layout
 ==================================== */

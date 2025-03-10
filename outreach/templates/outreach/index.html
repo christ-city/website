@@ -10,21 +10,27 @@
   <meta name="author" content="" />
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+  <script>
+      window.jQuery || document.write('<script src="/static/js/jquery-3.6.0.min.js"><\/script>');
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-   <script>
-    $(document).ready(function () {
-        if (typeof $.fn.fancybox === "undefined") {
-            console.warn("Fancybox not loaded properly!");
+  <script>
+    $(document).ready(function() {
+        if (typeof $.fn.fancybox !== 'undefined') {
+            $('.fancybox').fancybox();
         } else {
-            $(".fancybox").fancybox();
-            console.log("Fancybox initialized successfully!");
+            console.error("Error: Fancybox is not loaded properly!");
         }
     });
-    </script>
+  </script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 
-  <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
   <link href="static/css/bootstrap.css" rel="stylesheet" />
   <link href="static/css/bootstrap-responsive.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
