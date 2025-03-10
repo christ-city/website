@@ -220,100 +220,6 @@ a:active {
   font-display: swap;
 }
 
-
-
-/* === Bottom Navigation Bar === */
-.navbar {
-  background: url("../img/header2-bg.png") no-repeat center center;
-  background-size: cover;
-  padding: 15px 0;
-  text-align: center;
-  height: auto; /* Let content determine height */
-         
-}
-
-.nav-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  flex-direction: column; /* Stack links vertically */
-  text-align: center;
-  width: 100%;
-}
-
-.nav-links li {
-  margin: 0 15px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  transition: color 0.3s ease;
-  font-size: 16px;
-  display: block;
-}
-
-.nav-links a:hover {
-  color: #f8d210;
-}
-@media (max-width: 768px) {
-  .nav-links {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .nav-links li {
-    margin-bottom: 10px;
-  }
-}
-/* Adjust navbar items for mobile screens */
-@media (max-width: 768px) {
-  .navbar {
-      height: auto;
-      padding: 15px 0;
-  }
-
-  .navbar ul {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      width: 100%;
-  }
-
-  .navbar ul li {
-      width: 100%;
-      padding: 10px 0;
-  }
-
-  .navbar ul li a {
-      font-size: 16px;
-      display: block;
-      padding: 10px;
-      color: white; /* Ensure text is visible */
-  }
-}
-
-
-/* === Modal Styling === */
-.modal .modal-header {
-  background: #007bff;
-  color: white;
-}
-
-.modal .modal-body {
-  padding: 20px;
-}
-
-.modal input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-}
-
 /* ===============================
    Desktop Navigation (Default)
 ================================ */
@@ -323,9 +229,12 @@ a:active {
   background-size: cover;
   padding: 10px 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center; /* Ensure center alignment */
+  flex-wrap: wrap; /* Allow elements to wrap properly */
+  align-items: center;
   border: 5px solid yellow;
-  z-index: 9999 !important;
+  z-index: 9999;
+  width: 100%;
 }
 
 /* Ensure Text is Visible */
@@ -334,13 +243,10 @@ a:active {
   color: white;
   font-weight: bold;
   display: flex;
-  justify-content: flex-end; /* Pushes links to the right */
   list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%; 
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
-  font-weight: bold;
   font-size: 16px;
   transition: color 0.3s ease-in-out;
 }
@@ -350,12 +256,14 @@ a:active {
 }
 
 .bottom-header .nav-links {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Allow wrapping for small screens */
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 
 .bottom-header .nav-links li {
@@ -377,23 +285,28 @@ a:active {
    Mobile Navigation
 ================================ */
   /* Fix for Mobile Screens */
+/* === Mobile Fix === */
 @media (max-width: 768px) {
   .bottom-header {
-      padding: 8px 0; /* Reduce padding */
+      display: flex;
+      flex-direction: column; /* Stack elements properly */
+      align-items: center;
+      padding: 10px 0;
   }
 
-  .nav-links {
-      flex-direction: row; /* Keep links in a row */
-      flex-wrap: wrap; /* Allow wrapping */
-      justify-content: center; /* Center links */
+  .bottom-header .nav-links {
+      flex-direction: column; /* Stack links */
+      width: 100%;
   }
 
-  .nav-links li {
-      padding: 5px 8px;
+  .bottom-header .nav-links li {
+      padding: 8px 0;
+      width: 100%;
+      text-align: center;
   }
 
-  .nav-links a {
-      font-size: 14px; /* Smaller font */
+  .bottom-header .nav-links li a {
+      font-size: 14px; /* Make font smaller for mobile */
   }
 }
 @font-face {
