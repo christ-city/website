@@ -338,7 +338,7 @@ a:active {
   color: yellow; /* Change color on hover */
 }
 /* ===============================
-   Mobile Navigation (Hamburger)
+   Mobile Navigation
 ================================ */
 @media (max-width: 768px) {
   /* Adjust container */
@@ -349,52 +349,44 @@ a:active {
       align-items: center;
   }
 
-  /* Hide menu initially */
   .nav-links {
-    display: none;
-    flex-direction: column;
-    text-align: center;
-    background: #222;
-    position: absolute;
-    width: 100%;
-    top: 60px;
-    left: 0;
-    z-index: 1000;
-    padding: 10px 0;
-    border-top: 2px solid #444;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
 }
-  .nav-links li {
-      margin-bottom: 15px;
-  }
 
-  .nav-links a {
-      display: block;
-      padding: 12px;
-      font-size: 16px;
-      color: white;
-      text-decoration: none;
-      transition: all 0.3s ease;
-  }
+.nav-links li {
+    padding: 10px 20px;
+}
 
-  .nav-links a:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 5px;
-  }
-
-  /* Show menu when toggled */
-  .nav-links.menu-open {
-    display: flex !important;
-  }
-  /* Hamburger Icon */
-  .menu-toggle {
-    font-size: 28px;
+.nav-links a {
     color: white;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 10px;
-    z-index: 1100;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
     transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ffcc00; /* Highlight on hover */
+}
+
+/* Responsive Navbar for Mobile */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+    }
+
+    .nav-links li {
+        padding: 8px 10px;
+    }
+
+    .nav-links a {
+        font-size: 16px; /* Smaller text on mobile */
+    }
 }
 }
 
