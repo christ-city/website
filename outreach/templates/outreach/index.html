@@ -94,6 +94,9 @@
 <!-- Bottom Navigation Bar -->
 <nav class="bottom-header">
   <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="menu-toggle" id="menu-toggle">☰ Menu</div>
     <ul class="nav-links" id="nav-links">
       <li><a href="{% url 'index' %}">Home</a></li>
@@ -103,6 +106,7 @@
       <li><a href="{% url 'blog_list' %}">Blog <i class="icon-angle-down"></i></a></li>
       <li><a href="{% url 'contact' %}">Contact</a></li>
     </ul>
+    </div>
   </div>
 </nav>
 
@@ -595,6 +599,10 @@ Donate Now
         $(".fancybox").fancybox();
     });
 </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
   <script src="static/js/jquery.js"></script>
   <script src="static/js/jquery.easing.1.3.js"></script>
   <script src="static/js/bootstrap.js"></script>
