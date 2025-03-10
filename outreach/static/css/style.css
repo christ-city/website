@@ -231,6 +231,7 @@ a:active {
   display: flex;
   justify-content: center; /* Ensure center alignment */
   flex-wrap: wrap; /* Allow elements to wrap properly */
+  position: relative;
   align-items: center;
   border: 5px solid yellow;
   z-index: 9999;
@@ -271,11 +272,11 @@ a:active {
 }
 
 .bottom-header .nav-links li a {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  font-size: 16px;
-  transition: 0.3s ease-in-out;
+    text-decoration: none;
+    color: white !important; /* Force white text */
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
 }
 
 .bottom-header .nav-links li a:hover {
@@ -285,28 +286,30 @@ a:active {
    Mobile Navigation
 ================================ */
   /* Fix for Mobile Screens */
-/* === Mobile Fix === */
+/* === 📱 MOBILE FIX === */
 @media (max-width: 768px) {
   .bottom-header {
-      display: flex;
-      flex-direction: column; /* Stack elements properly */
-      align-items: center;
+      flex-direction: column;
       padding: 10px 0;
   }
 
   .bottom-header .nav-links {
-      flex-direction: column; /* Stack links */
-      width: 100%;
-  }
-
-  .bottom-header .nav-links li {
-      padding: 8px 0;
+      flex-direction: column;
       width: 100%;
       text-align: center;
   }
 
+  .bottom-header .nav-links li {
+      width: 100%;
+      text-align: center;
+      padding: 8px 0;
+  }
+
   .bottom-header .nav-links li a {
-      font-size: 14px; /* Make font smaller for mobile */
+      font-size: 14px;
+      display: block;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
   }
 }
 @font-face {
