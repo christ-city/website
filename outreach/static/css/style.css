@@ -341,48 +341,26 @@ a:active {
 /* ===============================
    Mobile Navigation
 ================================ */
-  @media (max-width: 768px) {
-    .bottom-header {
-        padding: 8px 0; /* Reduce padding */
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .nav-links {
-        flex-direction: row; /* Keep links in one line */
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .nav-links li {
-        padding: 5px 10px;
-    }
-
-    .nav-links a {
-        font-size: 14px; /* Smaller text for mobile */
-    }
-}
-
-.nav-links a:hover {
-    color: #ffcc00; /* Highlight on hover */
-}
-
-/* Responsive Navbar for Mobile */
+  /* Fix for Mobile Screens */
 @media (max-width: 768px) {
-    .nav-links {
-        flex-direction: column;
-    }
+  .bottom-header {
+      padding: 8px 0; /* Reduce padding */
+  }
 
-    .nav-links li {
-        padding: 8px 10px;
-    }
+  .nav-links {
+      flex-direction: row; /* Keep links in a row */
+      flex-wrap: wrap; /* Allow wrapping */
+      justify-content: center; /* Center links */
+  }
 
-    .nav-links a {
-        font-size: 16px; /* Smaller text on mobile */
-    }
+  .nav-links li {
+      padding: 5px 8px;
+  }
+
+  .nav-links a {
+      font-size: 14px; /* Smaller font */
+  }
 }
-
 @font-face {
   font-family: 'FontAwesome';
   src: url('/static/font/fontawesome/fontawesome-webfont.woff?v=3.0.1') format('woff2');
