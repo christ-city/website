@@ -21,8 +21,7 @@
   <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" rel="stylesheet">
   <link href="static/css/bootstrap.css" rel="stylesheet" />
   <link href="static/css/bootstrap-responsive.css" rel="stylesheet" />
-  <link href="static/css/fancybox/jquery.fancybox.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox-media.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
   <link href="static/css/jcarousel.css" rel="stylesheet" />
   <link href="static/css/flexslider.css" rel="stylesheet" />
   <link href="static/css/cslider.css" rel="stylesheet" />
@@ -665,12 +664,12 @@ document.addEventListener("click", function (e) {
       if (typeof $.fn.fancybox === 'undefined') {
           console.warn('Fancybox not loaded, attempting to load from CDN');
           var fancyboxScript = document.createElement('script');
-          fancyboxScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js';
+          fancyboxScript.src = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js';
           document.head.appendChild(fancyboxScript);
           
           var fancyboxCSS = document.createElement('link');
           fancyboxCSS.rel = 'stylesheet';
-          fancyboxCSS.href = 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css';
+          fancyboxCSS.href = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css';
           document.head.appendChild(fancyboxCSS);
           
           // Re-initialize after a short delay
