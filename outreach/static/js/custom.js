@@ -267,9 +267,19 @@ document.addEventListener("DOMContentLoaded", function() {
       // Only initialize plugins if they're available
       if (checkPlugins()) {
           // Fancybox initialization
-          if ($.fn.fancybox) {
-              $('.fancybox').fancybox();
-          }
+          Fancybox.bind("[data-fancybox]", {
+                animated: true,
+            toolbar: {
+                display: [
+                            "home",
+                            "about us",
+                            "school",
+                            "donate",
+                            "blog",
+                            "contact"
+                        ],
+  },
+          });
           
           // Tooltip initialization
           if ($.fn.tooltip) {
