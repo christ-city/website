@@ -10,6 +10,18 @@
   <meta name="author" content="" />
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+   <script>
+    $(document).ready(function () {
+        if (typeof $.fn.fancybox === "undefined") {
+            console.warn("Fancybox not loaded properly!");
+        } else {
+            $(".fancybox").fancybox();
+            console.log("Fancybox initialized successfully!");
+        }
+    });
+    </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 
   <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" rel="stylesheet">
@@ -87,20 +99,20 @@
 <!-- Bottom Navigation Bar -->
 <nav class="bottom-header">
   <div class="container">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="menu-toggle" id="menu-toggle">☰ Menu</div>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="{% url 'index' %}">Home</a></li>
-      <li><a href="{% url 'about' %}">About us <i class="icon-angle-down"></i></a></li>
-      <li><a href="{% url 'school' %}">School <i class="icon-angle-down"></i></a></li>
-      <li><a href="{% url 'donate2' %}">Donate <i class="icon-angle-down"></i></a></li>
-      <li><a href="{% url 'blog_list' %}">Blog <i class="icon-angle-down"></i></a></li>
-      <li><a href="{% url 'contact' %}">Contact</a></li>
-    </ul>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      ☰ Menu
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'about' %}">About Us</a></li>
+          <li><a href="{% url 'school' %}">School</a></li>
+          <li><a href="{% url 'donate2' %}">Donate</a></li>
+          <li><a href="{% url 'blog_list' %}">Blog</a></li>
+          <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+      </div>
     </div>
-  </div>
 </nav>
 
 <!-- Reset Password Modal -->

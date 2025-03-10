@@ -208,6 +208,19 @@ a:active {
   }
 }
 
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('/static/font/fontawesome/fontawesome-webfont.woff?v=3.0.1') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CustomIcon';
+  src: url('/static/font/customicon/Icons.woff') format('woff');
+  font-display: swap;
+}
+
+
 
 /* === Bottom Navigation Bar === */
 .navbar {
