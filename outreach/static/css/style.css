@@ -230,6 +230,8 @@ a:active {
   background-size: cover;
   padding: 15px 0;
   text-align: center;
+  height: 60px; /* Set a fixed height */
+  min-height: 60px;
 }
 
 .nav-links {
@@ -279,6 +281,8 @@ a:active {
   padding: 10px 0;
   display: flex;
   justify-content: flex-end;
+  height: 60px; /* Set a fixed height */
+  min-height: 60px;
 }
 
 /* Ensure Text is Visible */
