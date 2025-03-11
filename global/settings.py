@@ -172,7 +172,7 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 
 
 SECRET_KEY = config("SECRET_KEY", default="changeme")
-DEBUG = config("DEBUG", default=True, cast=bool)
+DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = ["global-vhly.onrender.com", "christcityglobaloutreach.org", "www.christcityglobaloutreach.org"]
 
