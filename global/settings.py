@@ -179,4 +179,4 @@ ALLOWED_HOSTS = ["global-vhly.onrender.com", "christcityglobaloutreach.org", "ww
 FLW_PUBLIC_KEY = config("FLW_PUBLIC_KEY")
 FLW_SECRET_KEY = config("FLW_SECRET_KEY")
 FLW_ENCRYPTION_KEY = config("FLW_ENCRYPTION_KEY")
-FLW_REDIRECT_URL = "https://www.christcityglobaloutreach.org/donate/confirm/"
+FLW_REDIRECT_URL = "https://www.christcityglobaloutreach.org/donation_confirm/"

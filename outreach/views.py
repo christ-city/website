@@ -175,40 +175,50 @@ def redirect_donation(request, donation_type):
         return redirect("donate2")
 
 def donate_one_time(request):
-    return render(request, "outreach/donate_one_time.html")  # One-Time Donation Page
+    if request.method == "POST":
+        return JsonResponse({"status": "success", "redirect_url": "https://flutterwave.com/pay/xyz"})
+    return JsonResponse({"error": "Invalid request"}, status=400)
 
 def donate_monthly(request):
-    return render(request, "outreach/donate_monthly.html")  # Monthly Donation Page
+    if request.method == "POST":
+        return JsonResponse({"status": "success", "redirect_url": "https://flutterwave.com/pay/xyz"})
+    return JsonResponse({"error": "Invalid request"}, status=400)
 
 @login_required
 def process_donation(request):
     if request.method == "POST":
         donation_type = request.POST.get("donation_type", "one-time")
         amount = request.POST.get("amount")
+        
+        # Validate amount
+        try:
+            amount = float(amount)
+            if amount <= 0:
+                return JsonResponse({"success": False, "error": "Amount must be greater than zero"}, status=400)
+        except (ValueError, TypeError):
+            return JsonResponse({"success": False, "error": "Invalid amount format"}, status=400)
+            
         name = request.user.get_full_name() or request.user.username
         email = request.user.email
-
-        if not amount or float(amount) <= 0:
-            return JsonResponse({"success": False, "error": "Invalid amount"}, status=400)
 
         try:
             donation = Donation.objects.create(
                 user=request.user,
-                amount=float(amount),
+                amount=amount,
                 donation_type=donation_type,
                 email=email,
                 status="pending"
             )
-        except TypeError:
-            return JsonResponse({"success": False, "error": "Model error - Missing 'status' field"}, status=400)
+        except Exception as e:
+            return JsonResponse({"success": False, "error": f"Database error: {str(e)}"}, status=400)
 
-        # ✅ Flutterwave Payment Data
+        # Flutterwave Payment Data
         payment_data = {
             "tx_ref": f"donation_{donation.id}",
-            "amount": float(amount),
+            "amount": amount,
             "currency": "USD",
             "payment_options": "card,banktransfer,ussd",
-            "redirect_url": settings.FLW_REDIRECT_URL,
+            "redirect_url": request.build_absolute_uri(reverse('donation_confirm')),
             "customer": {
                 "email": email,
                 "name": name,
@@ -219,59 +229,40 @@ def process_donation(request):
             },
         }
 
-        # ✅ Make API request to Flutterwave
-        headers = {
-            "Authorization": f"Bearer {settings.FLW_SECRET_KEY}",
-            "Content-Type": "application/json",
-        }
-
-        response = requests.post("https://api.flutterwave.com/v3/payments", json=payment_data, headers=headers)
-
+        # Make API request to Flutterwave
         try:
+            headers = {
+                "Authorization": f"Bearer {settings.FLW_SECRET_KEY}",
+                "Content-Type": "application/json",
+            }
+            
+            # Debug Flutterwave request
+            print(f"Flutterwave Request Headers: {headers}")
+            print(f"Flutterwave Request Data: {payment_data}")
+            
+            response = requests.post(
+                "https://api.flutterwave.com/v3/payments", 
+                json=payment_data, 
+                headers=headers
+            )
+            
+            # Debug Flutterwave response
+            print(f"Flutterwave Response Status: {response.status_code}")
+            print(f"Flutterwave Response Content: {response.content}")
+            
             res_data = response.json()
-            print("Flutterwave Response:", res_data)  # ✅ LOGGING API RESPONSE
-
+            
             if res_data.get("status") == "success":
                 return JsonResponse({"success": True, "redirect_url": res_data["data"]["link"]})
             else:
                 return JsonResponse({"success": False, "error": f"Payment initiation failed: {res_data}"}, status=400)
         except Exception as e:
-            return JsonResponse({"success": False, "error": f"Unexpected error: {str(e)}"}, status=400)
+            import traceback
+            print(f"Exception in payment processing: {str(e)}")
+            print(traceback.format_exc())
+            return JsonResponse({"success": False, "error": f"Payment processing error: {str(e)}"}, status=400)
 
-    return JsonResponse({"success": False, "error": "Invalid request"}, status=400)
-
-def donation_confirm(request):
-    transaction_id = request.GET.get('transaction_id')
-    tx_ref = request.GET.get('tx_ref')
-    status = request.GET.get('status')
-    
-    # If this is a return from Flutterwave with a successful payment
-    if status == 'successful' and tx_ref:
-        try:
-            # Extract the donation ID from tx_ref
-            donation_id = int(tx_ref.split('_')[1])
-            donation = get_object_or_404(Donation, id=donation_id)
-            
-            # Verify with Flutterwave directly
-            headers = {"Authorization": f"Bearer {settings.FLW_SECRET_KEY}"}
-            verify_url = f"https://api.flutterwave.com/v3/transactions/{transaction_id}/verify"
-            
-            response = requests.get(verify_url, headers=headers)
-            if response.status_code == 200:
-                data = response.json()
-                if data.get('status') == 'success' and data.get('data', {}).get('status') == 'successful':
-                    donation.status = 'completed'
-                    donation.save()
-                    messages.success(request, "Thank you! Your donation was successful.")
-                    return redirect('index')  # Redirect to home page after successful payment
-            
-            messages.error(request, "We couldn't verify your payment. Please contact support.")
-        except Exception as e:
-            messages.error(request, f"An error occurred: {str(e)}")
-    else:
-        messages.warning(request, "Your payment wasn't completed. Please try again.")
-    
-    return redirect('donate2')
+    return JsonResponse({"success": False, "error": "Invalid request method"}, status=400)
 
 
 
@@ -314,6 +305,52 @@ def flutterwave_webhook(request):
             return JsonResponse({"error": str(e)}, status=400)
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
+@csrf_exempt
+def donation_confirm(request):
+    try:
+        if request.method == "POST":
+            data = json.loads(request.body)
+            transaction_id = data.get("transaction_id")  # Get transaction ID from request
+            
+            if not transaction_id:
+                return JsonResponse({"error": "Transaction ID is missing"}, status=400)
+
+            # Verify the payment with Flutterwave
+            flutterwave_secret_key = settings.FLUTTERWAVE_SECRET_KEY
+            verify_url = f"https://api.flutterwave.com/v3/transactions/{transaction_id}/verify"
+            
+            headers = {
+                "Authorization": f"Bearer {flutterwave_secret_key}",
+                "Content-Type": "application/json"
+            }
+            
+            response = requests.get(verify_url, headers=headers)
+            response_data = response.json()
+            
+            if response_data.get("status") == "success":
+                # Payment verified, save donation to database (if applicable)
+                amount = response_data["data"]["amount"]
+                currency = response_data["data"]["currency"]
+                donor_email = response_data["data"]["customer"]["email"]
+                
+                
+                return JsonResponse({
+                    "success": True,
+                    "message": "Donation confirmed successfully",
+                    "amount": amount,
+                    "currency": currency,
+                    "email": donor_email
+                }, status=200)
+            else:
+                return JsonResponse({"error": "Payment verification failed"}, status=400)
+        
+        return JsonResponse({"error": "Invalid request method"}, status=405)
+
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid JSON data"}, status=400)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
 
 
 

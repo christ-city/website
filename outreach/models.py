@@ -94,6 +94,7 @@ class Donation(models.Model):
         ("completed", "Completed"),
         ("failed", "Failed"),
     ]
+    
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
