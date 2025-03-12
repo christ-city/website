@@ -33,7 +33,10 @@
                     </ul>
                 </div>
                 <div class="pricing-action">
-                    <a href="{% url 'donate_one_time' %}" class="btn btn-theme donate-btn">Donate Now</a>
+                    <form method="POST" action="{% url 'donate_one_time' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-theme donate-btn">Donate Now</button>
+                    </form>
                 </div>
             </div>
 
@@ -53,7 +56,10 @@
                     </ul>
                 </div>
                 <div class="pricing-action">
-                    <a href="{% url 'donate_monthly' %}" class="btn btn-theme donate-btn">Subscribe</a>
+                    <form method="POST" action="{% url 'donate_monthly' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-theme donate-btn">Donate Now</button>
+                    </form>
                 </div>
             </div>
 
@@ -61,27 +67,5 @@
     </section>
 
     <script src="{% static 'js/donate.js' %}"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-    const donateBoxes = document.querySelectorAll(".donation-box");
-
-    donateBoxes.forEach(box => {
-        box.addEventListener("mouseenter", () => {
-            donateBoxes.forEach(otherBox => {
-                if (otherBox !== box) {
-                    otherBox.classList.add("blur");
-                }
-            });
-        });
-
-        box.addEventListener("mouseleave", () => {
-            donateBoxes.forEach(otherBox => {
-                otherBox.classList.remove("blur");
-            });
-        });
-    });
-});
-
-    </script>
 </body>
 </html>
