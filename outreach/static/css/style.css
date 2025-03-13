@@ -2111,6 +2111,27 @@ ul.team-detail li ul.social-network li i {
   margin: 0;
 }
 
+.jcarousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.jcarousel ul {
+  width: 20000px; /* Large width to hold all items */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.jcarousel li {
+  float: left;
+  width: 200px; /* Adjust based on your design */
+  height: auto;
+  padding: 10px;
+}
+
+
 
 /* ===============================
 14. donation box

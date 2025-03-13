@@ -591,7 +591,6 @@ Donate Now
   <script src="static/js/modernizr.custom.28468.js"></script>
   <script src="static/js/jquery.cslider.js"></script>
   <script src="static/js/animate.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="static/js/bootstrap.min.js"></script>
 
 
@@ -638,19 +637,20 @@ document.addEventListener("click", function (e) {
     });
   </script>
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const loginLink = document.querySelector("[data-toggle='modal']");
-        if (loginLink) {
-            loginLink.addEventListener("click", function(event) {
-                event.preventDefault();
-                const loginModal = document.getElementById("myLogin");
-                if (loginModal) {
-                    $(loginModal).modal("show"); // Open Bootstrap modal
-                }
+    document.addEventListener("DOMContentLoaded", function () {
+        const loginBtn = document.querySelector("#signin-btn"); // Make sure the ID is correct
+        const loginModal = document.querySelector("#myLogin"); // Ensure the modal exists
+    
+        if (loginBtn && loginModal) {
+            loginBtn.addEventListener("click", function () {
+                $("#myLogin").modal("show"); // Open modal
             });
+        } else {
+            console.warn("Sign-in button or modal not found");
         }
     });
-    </script>    
+    </script>
+    
 
 </body>
 

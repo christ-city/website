@@ -71,7 +71,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll(".donation-option").forEach(option => {
                 option.addEventListener("click", function() {
-                    let donationType = this.dataset.type; // Get type from dataset
+                    let donationType = this.dataset.type;
                     if (donationType === "one-time") {
                         window.location.href = "{% url 'donate_one_time' %}";
                     } else if (donationType === "monthly") {
@@ -81,6 +81,7 @@
             });
         });
         </script>
+        
         
 </body>
 </html>

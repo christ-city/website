@@ -51,58 +51,64 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Form submission handler
-    document.querySelectorAll("form").forEach(form => {
-        form.addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            const amount = this.querySelector('input[name="amount"]').value;
-            if (!amount || isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
-                alert("Please enter a valid donation amount greater than zero.");
-                return;
-            }
-            
-            let formData = new FormData(this);
-            let submitButton = this.querySelector("button");
-            
-            // Update button state
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="icon-spinner icon-spin"></i> Processing...';
-            
-            // Send the request
-            fetch(this.action, {
-                method: "POST",
-                body: formData,
-                headers: {
-                    "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("form").forEach(form => {
+            form.addEventListener("submit", function (event) {
+                event.preventDefault(); // Stop default form submission
+                
+                // Get the donation amount
+                const amountInput = this.querySelector('input[name="amount"]');
+                const amount = amountInput ? amountInput.value : null;
+    
+                if (!amount || isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
+                    alert("Please enter a valid donation amount greater than zero.");
+                    return;
                 }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+    
+                // Ensure CSRF token is present
+                let csrfToken = document.querySelector("[name=csrfmiddlewaretoken]");
+                if (!csrfToken) {
+                    alert("CSRF Token missing. Please refresh the page.");
+                    return;
                 }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    window.location.href = data.redirect_url;  // Redirect to Flutterwave
-                } else {
-                    alert("Error: " + (data.error || "Unknown error"));
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("An unexpected error occurred. Please try again.");
-            })
-            .finally(() => {
-                submitButton.disabled = false;
-                submitButton.innerHTML = '<i class="icon-bolt"></i> Donate Now';
+    
+                let formData = new FormData(this);
+                let submitButton = this.querySelector("button");
+    
+                // Update button state
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="icon-spinner icon-spin"></i> Processing...';
+    
+                // Send the request
+                fetch(this.action, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRFToken": csrfToken.value
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json(); // Ensure the response is JSON
+                })
+                .then(data => {
+                    if (data.success && data.redirect_url) {
+                        window.location.href = data.redirect_url;  // Redirect to Flutterwave
+                    } else {
+                        alert("Error: " + (data.error || "Unknown error"));
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An unexpected error occurred. Please try again.");
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = '<i class="icon-bolt"></i> Donate Now';
+                });
             });
         });
     });
 });
-
-
-
-
-

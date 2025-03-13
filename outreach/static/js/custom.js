@@ -123,8 +123,18 @@ jQuery(document).ready(function($) {
     return false;
   });
 
-  $('#mycarousel').jcarousel();
-  $('#mycarousel1').jcarousel();
+  $(document).ready(function () {
+    if ($.fn.jcarousel) { // Ensure jCarousel is loaded
+        console.log("jCarousel is loaded and initializing...");
+        $("#mycarousel, #mycarousel1").jcarousel({
+            wrap: "circular",  // Ensures continuous scrolling
+            animation: 600
+        });
+    } else {
+        console.error("jCarousel is not loaded!");
+    }
+});
+
 
   //flexslider
   $('.flexslider').flexslider();
