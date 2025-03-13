@@ -41,7 +41,7 @@
             <div class="donation-row">
                 
                 <!-- One-Time Donation -->
-                <div class="pricing-box-alt donation-box" data-type="one-time">
+                <div class="pricing-box-alt donation-box" data-type="monthly">
                     <div class="pricing-heading">
                         <h3>Become <strong>A Partner</strong></h3>
                     </div>
@@ -56,7 +56,7 @@
                         </ul>
                     </div>
                     <div class="donation-box">
-                        <form id="monthly-donation-form" method="POST" action="{% url 'process_donation' %}">
+                        <form  method="POST" action="{% url 'process_donation' %}">
                             {% csrf_token %}
                             <input type="hidden" name="donation_type" value="monthly">
                             <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
@@ -81,7 +81,7 @@
                         </ul>
                     </div>
                     <div class="donation-box">
-                        <form id="monthly-donation-form" method="POST" action="{% url 'process_donation' %}">
+                        <form  method="POST" action="{% url 'process_donation' %}">
                             {% csrf_token %}
                             <input type="hidden" name="donation_type" value="monthly">
                             <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
@@ -109,7 +109,7 @@
                         </ul>
                     </div>
                     <div class="donation-box">
-                        <form id="monthly-donation-form" method="POST" action="{% url 'process_donation' %}">
+                        <form  method="POST" action="{% url 'process_donation' %}">
                             {% csrf_token %}
                             <input type="hidden" name="donation_type" value="monthly">
                             <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
@@ -132,7 +132,24 @@
         </div>
     </section>
 
-    <script src="{% static 'js/donate.js' %}"></script>      
+    <script src="{% static 'js/donate.js' %}" defer></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("form").forEach(form => {
+                form.addEventListener("submit", function (event) {
+                    const amountInput = this.querySelector('input[name="amount"]');
+                    const amount = parseFloat(amountInput.value);
+        
+                    if (!amount || isNaN(amount) || amount <= 0) {
+                        alert("Please enter a valid donation amount greater than $0.");
+                        event.preventDefault(); // Stop the form submission
+                    }
+                });
+            });
+        });
+        </script>
+              
         
 </body>
 </html>

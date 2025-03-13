@@ -56,14 +56,14 @@
                         </ul>
                     </div>
                     <div class="donation-box">
-                        <form id="one-time-donation-form" method="POST" action="{% url 'process_donation' %}">
+                        <form  method="POST" action="{% url 'process_donation' %}">
                             {% csrf_token %}
                             <input type="hidden" name="donation_type" value="one-time">
                             <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
                             <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
                         </form>
                     </div>
-                <div class="pricing-box-alt special donation-box" data-type="monthly">
+                <div class="pricing-box-alt special donation-box" data-type="one-time">
                     <div class="pricing-heading">
                         <h3><strong>Empower a Classroom</strong></h3>
                     </div>
@@ -78,7 +78,7 @@
                         </ul>
                     </div>
                     <div class="donation-box">
-                        <form id="one-time-donation-form" method="POST" action="{% url 'process_donation' %}">
+                        <form  method="POST" action="{% url 'process_donation' %}">
                             {% csrf_token %}
                             <input type="hidden" name="donation_type" value="one-time">
                             <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
@@ -104,7 +104,7 @@
                         </ul>
                     </div>
                     <div class="donation-box">
-                        <form id="one-time-donation-form" method="POST" action="{% url 'process_donation' %}">
+                        <form  method="POST" action="{% url 'process_donation' %}">
                             {% csrf_token %}
                             <input type="hidden" name="donation_type" value="one-time">
                             <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
@@ -127,7 +127,24 @@
         </div>
     </section>
 
-    <script src="{% static 'js/donate.js' %}"></script>       
+    <script src="{% static 'js/donate.js' %}" defer></script>
+ 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("form").forEach(form => {
+                form.addEventListener("submit", function (event) {
+                    const amountInput = this.querySelector('input[name="amount"]');
+                    const amount = parseFloat(amountInput.value);
+        
+                    if (!amount || isNaN(amount) || amount <= 0) {
+                        alert("Please enter a valid donation amount greater than $0.");
+                        event.preventDefault(); // Stop the form submission
+                    }
+                });
+            });
+        });
+        </script>
+             
         
 </body>
 </html>
