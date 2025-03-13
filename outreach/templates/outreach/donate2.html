@@ -67,5 +67,20 @@
     </section>
 
     <script src="{% static 'js/donate.js' %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".donation-option").forEach(option => {
+                option.addEventListener("click", function() {
+                    let donationType = this.dataset.type; // Get type from dataset
+                    if (donationType === "one-time") {
+                        window.location.href = "{% url 'donate_one_time' %}";
+                    } else if (donationType === "monthly") {
+                        window.location.href = "{% url 'donate_monthly' %}";
+                    }
+                });
+            });
+        });
+        </script>
+        
 </body>
 </html>
