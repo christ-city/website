@@ -7,19 +7,21 @@
 
 {% block title %}
        <!-- Top Header -->
-       <header class="top-header">
-        <div class="container">
-            <div class="top-header-content">
-                <!-- Left Side: User Info -->
-                <div class="user-info">
-                    {% if user.is_authenticated %}
-                        <span class="user-highlight">Welcome, {{ user.username }}</span>
-                        <a href="{% url 'logout' %}" class="btn btn-theme">Log Out</a>
-                    {% else %}
-                    <a href="{% url 'login' %}" data-toggle="modal">Sign in</a> 
-                    <a href="{% url 'register' %}" data-toggle="modal">Sign up</a>
-                    {% endif %}
-                </div>
+       
+<header class="top-header">
+    <div class="container">
+      <div class="top-header-content">
+        <!-- Left Side: User Info -->
+        <div class="user-info">
+            {% if user.is_authenticated %}
+                <span class="user-highlight">Welcome |  {{ user.username }}</span>
+                <a href="{% url 'logout' %}" class="btn btn-theme btn-large e_tada">Log Out</a>
+            {% else %}
+                <p>You are not logged in.</p>
+                      <a href="{% url 'login' %}" class="btn btn-theme">Sign in</a>
+                      <a href="{% url 'register' %}" class="btn btn-theme">Sign up</a>
+            {% endif %}
+        </div>
 
                 <!-- Right Side: Organization Name & Logo -->
                 <div class="org-name">

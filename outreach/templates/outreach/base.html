@@ -59,8 +59,8 @@
                         <span class="user-highlight">Welcome, {{ user.username }}</span>
                         <a href="{% url 'logout' %}" class="btn btn-theme">Log Out</a>
                     {% else %}
-                    <a href="{% url 'login' %}" data-toggle="modal">Sign in</a> 
-                    <a href="{% url 'register' %}" data-toggle="modal">Sign up</a>
+                    <a href="{% url 'login' %}" class="btn btn-theme">Sign in</a>
+                    <a href="{% url 'register' %}" class="btn btn-theme">Sign up</a>
                     {% endif %}
                 </div>
 
