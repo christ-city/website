@@ -177,12 +177,12 @@ def redirect_donation(request, donation_type):
 
 def donate_one_time(request):
     """Renders the donation page for one-time donations."""
-    return render(request, "donate_one_time.html")  # Ensure this template exists
+    return render(request, "outreach/donate_one_time.html")  
 
 
 def donate_monthly(request):
     """Renders the donation page for monthly donations."""
-    return render(request, "donate_monthly.html")  # Ensure this template exists
+    return render(request, "outreach/donate_monthly.html")  
 
 
 # Process the Donation 
