@@ -188,7 +188,6 @@ def donate_monthly(request):
 # Process the Donation 
 @login_required
 def process_donation(request):
-    """Handles donation form submission and redirects user to Flutterwave."""
     if request.method == "POST":
         donation_type = request.POST.get("donation_type", "one-time")
         amount = request.POST.get("amount")
@@ -204,19 +203,16 @@ def process_donation(request):
         name = request.user.get_full_name() or request.user.username
         email = request.user.email
 
-        try:
-            # Store the donation BEFORE redirecting to Flutterwave
-            donation = Donation.objects.create(
-                user=request.user,
-                amount=amount,
-                donation_type=donation_type,
-                email=email,
-                status="pending"
-            )
-        except Exception as e:
-            return JsonResponse({"success": False, "error": f"Database error: {str(e)}"}, status=400)
+        # Save donation before processing payment
+        donation = Donation.objects.create(
+            user=request.user,
+            amount=amount,
+            donation_type=donation_type,
+            email=email,
+            status="pending"
+        )
 
-        # Prepare the Flutterwave Payment Data
+        # Prepare payment request
         payment_data = {
             "tx_ref": f"donation_{donation.id}",
             "amount": amount,
@@ -233,29 +229,34 @@ def process_donation(request):
             },
         }
 
-        #Make API request to Flutterwave
-        try:
-            headers = {
-                "Authorization": f"Bearer {settings.FLW_SECRET_KEY}",
-                "Content-Type": "application/json",
-            }
+        headers = {
+            "Authorization": f"Bearer {settings.FLW_SECRET_KEY}",
+            "Content-Type": "application/json",
+        }
 
-            response = requests.post(
-                "https://api.flutterwave.com/v3/payments",
-                json=payment_data,
-                headers=headers
-            )
+        # Debug request before sending
+        print("Sending payment request to Flutterwave...")
+        print("Headers:", headers)
+        print("Payment Data:", payment_data)
 
-            res_data = response.json()
+        response = requests.post(
+            "https://api.flutterwave.com/v3/payments",
+            json=payment_data,
+            headers=headers
+        )
 
-            #Redirect user to Flutterwave Payment Page
-            if res_data.get("status") == "success":
-                return JsonResponse({"success": True, "redirect_url": res_data["data"]["link"]})
-            else:
-                return JsonResponse({"success": False, "error": "Payment initiation failed"}, status=400)
-        
-        except Exception as e:
-            return JsonResponse({"success": False, "error": f"Payment processing error: {str(e)}"}, status=400)
+        # Debug response
+        print("Flutterwave Response Code:", response.status_code)
+        print("Flutterwave Response:", response.json())
+        print("Redirect URL:", request.build_absolute_uri(reverse('donation_confirm')))
+
+
+        res_data = response.json()
+
+        if res_data.get("status") == "success":
+            return JsonResponse({"success": True, "redirect_url": res_data["data"]["link"]})
+        else:
+            return JsonResponse({"success": False, "error": f"Payment initiation failed: {res_data}"}, status=400)
 
     return JsonResponse({"success": False, "error": "Invalid request method"}, status=400)
 
