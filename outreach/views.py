@@ -281,7 +281,7 @@ def flutterwave_webhook(request):
             if verify_data.get("status") != "success":
                 return JsonResponse({"error": "Transaction verification failed"}, status=400)
 
-            # ✅ Update Donation Status in Database
+            # Update Donation Status in Database
             donation_id = int(tx_ref.split("_")[1])
             donation = get_object_or_404(Donation, id=donation_id)
 
