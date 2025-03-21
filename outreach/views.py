@@ -23,6 +23,7 @@ import requests
 import hmac
 import hashlib
 from django.views.decorators.csrf import csrf_exempt
+from dotenv import load_dotenv
 
 
 

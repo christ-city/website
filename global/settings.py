@@ -13,9 +13,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from decouple import config
+from dotenv import load_dotenv
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
@@ -171,12 +175,12 @@ ACCOUNT_USERNAME_REQUIRED = True
 SOCIALACCOUNT_QUERY_EMAIL = True
 
 
-SECRET_KEY = config("SECRET_KEY", default="changeme")
-DEBUG = config("DEBUG", default=False, cast=bool)
+SECRET_KEY = os.getenv("SECRET_KEY", default="changeme")
+DEBUG = os.getenv("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = ["global-vhly.onrender.com", "christcityglobaloutreach.org", "www.christcityglobaloutreach.org"]
 
-FLW_PUBLIC_KEY = config("FLW_PUBLIC_KEY")
-FLW_SECRET_KEY = config("FLW_SECRET_KEY")
-FLW_ENCRYPTION_KEY = config("FLW_ENCRYPTION_KEY")
+FLW_SECRET_KEY = os.getenv("FLW_SECRET_KEY")
+FLW_SECRET_KEY = os.getenv("FLW_SECRET_KEY")
+FLW_ENCRYPTION_KEY = os.getenv("FLW_ENCRYPTION_KEY")
 FLW_REDIRECT_URL = "https://www.christcityglobaloutreach.org/donation_confirm/"
