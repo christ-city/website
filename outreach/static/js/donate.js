@@ -1,19 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Highlight selected donation amounts when clicked
     const amountInputs = document.querySelectorAll('.donation-input');
-    
+
     amountInputs.forEach(input => {
         // Add focus event handler
         input.addEventListener('focus', function() {
-            // Remove highlight from all donation boxes
             document.querySelectorAll('.donation-box').forEach(box => {
                 box.classList.remove('selected');
             });
-            
-            // Add highlight to parent donation box
+
             this.closest('.donation-box').classList.add('selected');
         });
-        
+
         // Set predefined amounts if available
         const presetAmount = input.closest('.pricing-box-alt').querySelector('.pricing-terms h6');
         if (presetAmount && presetAmount.textContent.includes('$')) {
@@ -24,11 +22,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     });
-    
+
     // Animation effects for donation boxes
     const donationBoxes = document.querySelectorAll(".pricing-box-alt");
     donationBoxes.forEach(box => {
-        // Hover Animation
         box.addEventListener("mouseenter", function () {
             this.style.transform = "scale(1.05)";
             this.style.boxShadow = "0px 10px 25px rgba(0, 0, 0, 0.4)";
@@ -39,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
             this.style.boxShadow = "0px 8px 20px rgba(0, 0, 0, 0.2)";
         });
 
-        // On click, highlight the selected box
         box.addEventListener("click", function () {
             donationBoxes.forEach(item => {
                 item.style.background = "rgba(255, 255, 255, 0.9)";
@@ -51,45 +47,65 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll("form").forEach(form => {
-            form.addEventListener("submit", function (event) {
-                event.preventDefault(); // Stop default form submission
-    
-                let formData = new FormData(this);
-                let submitButton = this.querySelector("button");
-                submitButton.disabled = true;
-                submitButton.innerHTML = '<i class="icon-spinner icon-spin"></i> Processing...';
-    
-                fetch(this.action, {
-                    method: "POST",
-                    body: formData,
-                    headers: {
-                        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.success && data.redirect_url) {
-                        window.location.href = data.redirect_url;  // ✅ Redirect to Flutterwave
-                    } else {
-                        alert("Error: " + (data.error || "Unknown error"));
-                    }
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    alert("An unexpected error occurred. Please try again.");
-                })
-                .finally(() => {
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = '<i class="icon-bolt"></i> Donate Now';
-                });
+    // ✅ Donation form submission (handles redirection to Flutterwave)
+    document.querySelectorAll("form").forEach(form => {
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            let amountInput = this.querySelector('input[name="amount"]');
+            let donationType = this.querySelector('input[name="donation_type"]:checked');
+            let submitButton = this.querySelector("button");
+
+            // Validate amount
+            let amount = parseFloat(amountInput.value);
+            if (!amount || isNaN(amount) || amount <= 0) {
+                alert("Please enter a valid donation amount greater than $0.");
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="icon-spinner icon-spin"></i> Processing...';
+
+            fetch("/process_donation/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken") // Get CSRF token for Django
+                },
+                body: JSON.stringify({ amount: amount, donation_type: donationType.value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.redirect_url) {
+                    window.location.href = data.redirect_url;  // ✅ Redirect to Flutterwave
+                } else {
+                    alert("Error: " + (data.error || "Unknown error"));
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An unexpected error occurred. Please try again.");
+            })
+            .finally(() => {
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<i class="icon-bolt"></i> Donate Now';
             });
         });
     });
-});  
+
+    // Function to get CSRF token from cookies
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+            let cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.startsWith(name + "=")) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+});
