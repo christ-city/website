@@ -175,8 +175,8 @@ ACCOUNT_USERNAME_REQUIRED = True
 SOCIALACCOUNT_QUERY_EMAIL = True
 
 
-SECRET_KEY = os.getenv("SECRET_KEY", default="changeme")
-DEBUG = os.getenv("DEBUG", default=False, cast=bool)
+SECRET_KEY = os.getenv("SECRET_KEY", "changeme")
+DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = ["global-vhly.onrender.com", "christcityglobaloutreach.org", "www.christcityglobaloutreach.org"]
 
