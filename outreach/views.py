@@ -25,6 +25,9 @@ import hashlib
 from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
 from django.conf import settings
+from django.core.mail import send_mail
+from django.contrib import messages
+from .models import ContactMessage
 
 FLW_SECRET_KEY = settings.FLW_SECRET_KEY
 FLW_ENCRYPTION_KEY = settings.FLW_ENCRYPTION_KEY
@@ -78,6 +81,34 @@ def contact_view(request):
         form = ContactForm()
 
     return render(request, "outreach/contact.html", {"form": form})
+
+def submit_contact(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
+
+        if not name or not email or not message:
+            messages.error(request, "All fields are required.")
+            return redirect("submit_contact")  # Redirect back to the form
+        
+        # Save to the database
+        ContactMessage.objects.create(name=name, email=email, message=message)
+
+        # Send email to admin
+        admin_email = settings.ADMIN_EMAIL  # Define this in settings.py
+        send_mail(
+            subject=f"New Contact Message from {name}",
+            message=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}",
+            from_email=settings.DEFAULT_FROM_EMAIL,  # Ensure you set this
+            recipient_list=[admin_email],
+            fail_silently=False,
+        )
+
+        messages.success(request, "Your message has been sent successfully!")
+        return redirect("contact")  # Redirect to contact page
+
+    return render(request, "contact.html")
 
 
 # ✅ Register User
