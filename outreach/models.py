@@ -88,6 +88,7 @@ class Donation(models.Model):
     DONATION_TYPE = [
         ('monthly', 'Monthly'),
         ('one-time', 'One-Time'),
+        ('major', 'Major'),
     ]
     STATUS_CHOICES = [
         ("pending", "Pending"),

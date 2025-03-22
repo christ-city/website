@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import json
 import os
 from decouple import config
 from dotenv import load_dotenv
+
 
 
 
@@ -184,3 +186,9 @@ FLW_SECRET_KEY = os.getenv("FLW_SECRET_KEY")
 FLW_SECRET_KEY = os.getenv("FLW_SECRET_KEY")
 FLW_ENCRYPTION_KEY = os.getenv("FLW_ENCRYPTION_KEY")
 FLW_REDIRECT_URL = "https://www.christcityglobaloutreach.org/donation_confirm/"
+
+# Parse the scope list
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = os.getenv("SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE", "").split(",")
+
+# Parse the JSON string for SOCIALACCOUNT_PROVIDERS
+SOCIALACCOUNT_PROVIDERS = json.loads(os.getenv("SOCIALACCOUNT_PROVIDERS", "{}"))

@@ -187,9 +187,14 @@ def donate_monthly(request):
 
 
 # Process the Donation 
-@login_required
 def process_donation(request):
     if request.method == "POST":
+        # Get the CSRF token from the request
+        csrf_token = request.META.get('HTTP_X_CSRFTOKEN', '')
+        
+        # Log the token for debugging
+        print(f"CSRF Token received: {csrf_token}")
+
         # Check if the request contains JSON data
         if request.content_type == 'application/json':
                 data = json.loads(request.body)
@@ -234,7 +239,7 @@ def process_donation(request):
             "amount": amount,
             "currency": "USD",
             "payment_options": "card,banktransfer,ussd",
-            "redirect_url": request.build_absolute_uri(reverse('donation_confirm')),
+            "redirect_url": settings.FLW_REDIRECT_URL,
             "customer": {
                 "email": email,
                 "name": name,
@@ -246,9 +251,9 @@ def process_donation(request):
         }
 
         headers = {
-            "Authorization": f"Bearer {settings.FLW_SECRET_KEY}",
-            "Content-Type": "application/json",
-        }
+    "Authorization": f"Bearer {settings.FLW_SECRET_KEY.strip()}",
+    "Content-Type": "application/json",
+}
 
         # Debug request before sending
         print("Sending payment request to Flutterwave...")
@@ -263,11 +268,13 @@ def process_donation(request):
 
         # Debug response
         print("Flutterwave Response Code:", response.status_code)
+        print(f"Using API key: {settings.FLW_SECRET_KEY[:10]}...{settings.FLW_SECRET_KEY[-5:]}")
         print("Flutterwave Response:", response.json())
-        print("Redirect URL:", request.build_absolute_uri(reverse('donation_confirm')))
+        print("Redirect URL:", settings.FLW_REDIRECT_URL)
 
 
         res_data = response.json()
+        print("Flutterwave Response:", res_data)
 
         if res_data.get("status") == "success":
             return JsonResponse({"success": True, "redirect_url": res_data["data"]["link"]})
