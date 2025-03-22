@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let donationType = donationTypeInput ? donationTypeInput.value : "one-time";
             console.log("Processing donation type:", donationType); // Debug log
     
-            fetch("/process_donation", {
+            fetch("/donate/process/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
