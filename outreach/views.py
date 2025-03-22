@@ -192,23 +192,29 @@ def process_donation(request):
     if request.method == "POST":
         # Check if the request contains JSON data
         if request.content_type == 'application/json':
-            data = json.loads(request.body)
-            print("JSON data received:", data)
-            donation_type = data.get("donation_type", "one-time", "monthly")
-            amount = data.get("amount")
+                data = json.loads(request.body)
+                print("JSON data received:", data)
+                donation_type = data.get("donation_type", "one-time")
+                amount = data.get("amount")
         else:
-            # Handle regular form submission
-            print("Form data received:", request.POST)
-            donation_type = request.POST.get("donation_type", "one-time", "monthly")
-            amount = request.POST.get("amount")
-        
+                # For form data
+                print("Form data received:", request.POST)
+                donation_type = request.POST.get("donation_type", "one-time")
+                amount = request.POST.get("amount")
+
+
         # Validate amount
         try:
-            amount = float(amount)
-            if amount <= 0:
-                return JsonResponse({"success": False, "error": "Amount must be greater than zero"}, status=400)
+                amount = float(amount)
+                if amount <= 0:
+                    return JsonResponse({"success": False, "error": "Amount must be greater than zero"}, status=400)
         except (ValueError, TypeError):
-            return JsonResponse({"success": False, "error": "Invalid amount format"}, status=400)
+                return JsonResponse({"success": False, "error": "Invalid amount format"}, status=400)
+
+        # Validate donation type
+        valid_donation_types = ["one-time", "monthly", "major"]
+        if donation_type not in valid_donation_types:
+                donation_type = "one-time"  # Default fallback
 
         name = request.user.get_full_name() or request.user.username
         email = request.user.email

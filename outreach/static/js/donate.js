@@ -48,37 +48,47 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // ✅ Donation form submission (handles redirection to Flutterwave)
-    document.querySelectorAll("form").forEach(form => {
+    document.querySelectorAll("form.donation-form").forEach(form => {
         form.addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent default form submission
-
+    
             let amountInput = this.querySelector('input[name="amount"]');
             let donationTypeInput = this.querySelector('input[name="donation_type"]');
             let submitButton = this.querySelector("button");
-
+    
             // Validate amount
             let amount = parseFloat(amountInput.value);
             if (!amount || isNaN(amount) || amount <= 0) {
                 alert("Please enter a valid donation amount greater than $0.");
                 return;
             }
-
+    
             submitButton.disabled = true;
             submitButton.innerHTML = '<i class="icon-spinner icon-spin"></i> Processing...';
-
-            fetch("process_donation", {
+    
+            // Get the donation type value
+            let donationType = donationTypeInput ? donationTypeInput.value : "one-time";
+            console.log("Processing donation type:", donationType); // Debug log
+    
+            fetch("/process_donation", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken") // Get CSRF token for Django
+                    "X-CSRFToken": getCookie("csrftoken")
                 },
-                body: JSON.stringify({ amount: amount, donation_type: donationType.value })
+                body: JSON.stringify({ 
+                    amount: amount, 
+                    donation_type: donationType
+                })
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log("Response status:", response.status); // Debug log
+                return response.json();
+            })
             .then(data => {
-                console.log("Response from server:", data); // debugging
+                console.log("Response data:", data); // Debug log
                 if (data.success && data.redirect_url) {
-                    window.location.href = data.redirect_url;  //  Redirect to Flutterwave
+                    window.location.href = data.redirect_url;  // Redirect to Flutterwave
                 } else {
                     alert("Error: " + (data.error || "Unknown error"));
                 }
