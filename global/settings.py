@@ -17,6 +17,9 @@ from decouple import config
 from dotenv import load_dotenv
 
 
+load_dotenv()
+
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -178,7 +181,10 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 
 
 SECRET_KEY = os.getenv("SECRET_KEY", "changeme")
+
+
 DEBUG = config("DEBUG", default=False, cast=bool)
+
 
 ALLOWED_HOSTS = ["global-vhly.onrender.com", "christcityglobaloutreach.org", "www.christcityglobaloutreach.org"]
 

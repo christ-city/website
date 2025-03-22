@@ -24,6 +24,12 @@ import hmac
 import hashlib
 from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
+from django.conf import settings
+
+FLW_SECRET_KEY = settings.FLW_SECRET_KEY
+FLW_ENCRYPTION_KEY = settings.FLW_ENCRYPTION_KEY
+
+print(f"Using API key: {FLW_SECRET_KEY[:5]}...{FLW_SECRET_KEY[-5:]}")
 
 
 
