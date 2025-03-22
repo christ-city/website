@@ -331,38 +331,49 @@ def flutterwave_webhook(request):
 # Final Confirmation View After Payment
 @csrf_exempt
 def donation_confirm(request):
-    """Handles post-payment confirmation and displays the success page."""
+    """Handles payment confirmation and displays success or failure page."""
     try:
-        if request.method == "POST":
-            data = json.loads(request.body)
-            transaction_id = data.get("transaction_id")
+        tx_ref = request.GET.get("tx_ref")
+        status = request.GET.get("status")
 
-            if not transaction_id:
-                return JsonResponse({"error": "Transaction ID is missing"}, status=400)
+        if not tx_ref:
+            return render(request, "donation_failed.html", {"message": "Transaction reference missing."})
 
-            # Verify the payment with Flutterwave
-            verify_url = f"https://api.flutterwave.com/v3/transactions/{transaction_id}/verify"
-            headers = {"Authorization": f"Bearer {settings.FLW_SECRET_KEY}", "Content-Type": "application/json"}
-            response = requests.get(verify_url, headers=headers)
-            response_data = response.json()
+        if status != "successful":
+            return render(request, "donation_failed.html", {"message": "Payment was not successful."})
 
-            if response_data.get("status") == "success":
-                amount = response_data["data"]["amount"]
-                currency = response_data["data"]["currency"]
-                donor_email = response_data["data"]["customer"]["email"]
+        # Verify payment with Flutterwave
+        verify_url = f"https://api.flutterwave.com/v3/transactions/{tx_ref}/verify"
+        headers = {"Authorization": f"Bearer {settings.FLW_SECRET_KEY}"}
 
-                return render(request, "donation_success.html", {
-                    "amount": amount,
-                    "currency": currency,
-                    "email": donor_email
-                })
-            else:
-                return JsonResponse({"error": "Payment verification failed"}, status=400)
+        response = requests.get(verify_url, headers=headers)
+        data = response.json()
 
-        return JsonResponse({"error": "Invalid request method"}, status=405)
+        # Debugging: Print response data
+        print("Flutterwave Verification Response:", data)
+
+        if data.get("status") == "success" and data.get("data"):
+            amount = data["data"].get("amount", "N/A")
+            currency = data["data"].get("currency", "N/A")
+            donor_email = data["data"]["customer"].get("email", "N/A")
+            transaction_id = data["data"].get("id", "N/A")
+
+            return render(request, "donation_success.html", {
+                "amount": amount,
+                "currency": currency,
+                "email": donor_email,
+                "transaction_id": transaction_id
+            })
+
+        return render(request, "donation_failed.html", {"message": "Payment verification failed."})
+
+    except requests.exceptions.RequestException as e:
+        print("⚠️ API Request Error:", str(e))
+        return render(request, "donation_failed.html", {"message": "Payment verification service unavailable. Please try again."})
 
     except Exception as e:
-        return JsonResponse({"error": str(e)}, status=500)
+        print("⚠️ Unexpected Error:", str(e))
+        return render(request, "donation_failed.html", {"message": "An unexpected error occurred. Please try again later."})
 
 
 
