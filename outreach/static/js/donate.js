@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
             event.preventDefault(); // Prevent default form submission
 
             let amountInput = this.querySelector('input[name="amount"]');
-            let donationType = this.querySelector('input[name="donation_type"]:checked');
+            let donationTypeInput = this.querySelector('input[name="donation_type"]');
             let submitButton = this.querySelector("button");
 
             // Validate amount
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
             submitButton.disabled = true;
             submitButton.innerHTML = '<i class="icon-spinner icon-spin"></i> Processing...';
 
-            fetch("/process_donation/", {
+            fetch("process_donation", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -76,8 +76,9 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(response => response.json())
             .then(data => {
+                console.log("Response from server:", data); // debugging
                 if (data.success && data.redirect_url) {
-                    window.location.href = data.redirect_url;  // ✅ Redirect to Flutterwave
+                    window.location.href = data.redirect_url;  //  Redirect to Flutterwave
                 } else {
                     alert("Error: " + (data.error || "Unknown error"));
                 }
