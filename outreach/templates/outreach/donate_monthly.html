@@ -57,7 +57,7 @@
                         </ul>
                     </div>
                     <div class="donation-box">
-                        <form  method="POST" action="{% url 'process_donation' %}">
+                        <form method="POST" class="donation-form">
                             {% csrf_token %}
                             <input type="hidden" name="donation_type" value="monthly">
                             <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
@@ -82,7 +82,7 @@
                         </ul>
                     </div>
                     <div class="donation-box">
-                        <form  method="POST" action="{% url 'process_donation' %}">
+                        <form method="POST" class="donation-form">
                             {% csrf_token %}
                             <input type="hidden" name="donation_type" value="monthly">
                             <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
@@ -110,7 +110,7 @@
                         </ul>
                     </div>
                     <div class="donation-box">
-                        <form  method="POST" action="{% url 'process_donation' %}">
+                        <form method="POST" class="donation-form">
                             {% csrf_token %}
                             <input type="hidden" name="donation_type" value="monthly">
                             <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>

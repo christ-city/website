@@ -190,9 +190,16 @@ def donate_monthly(request):
 @login_required
 def process_donation(request):
     if request.method == "POST":
-        donation_type = request.POST.get("donation_type", "one-time")
-        amount = request.POST.get("amount")
-
+        # Check if the request contains JSON data
+        if request.content_type == 'application/json':
+            data = json.loads(request.body)
+            donation_type = data.get("donation_type", "one-time", "monthly")
+            amount = data.get("amount")
+        else:
+            # Handle regular form submission
+            donation_type = request.POST.get("donation_type", "one-time", "monthly")
+            amount = request.POST.get("amount")
+        
         # Validate amount
         try:
             amount = float(amount)
