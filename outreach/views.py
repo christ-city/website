@@ -259,6 +259,7 @@ def process_donation(request):
         print("Sending payment request to Flutterwave...")
         print("Headers:", headers)
         print("Payment Data:", payment_data)
+        print(f"Using API key: {FLW_SECRET_KEY[:5]}...{FLW_SECRET_KEY[-5:]}")
 
         response = requests.post(
             "https://api.flutterwave.com/v3/payments",
