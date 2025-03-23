@@ -1,13 +1,12 @@
 from django.forms import ModelForm
 from .models import ContactMessage
 from django import forms
-from django import forms
 from .models import BlogPost, BlogPostImage
 
 class ContactForm(ModelForm):
     class Meta:
         model = ContactMessage
-        fields = ['name', 'email', 'subject', 'message']
+        fields = ['name', 'email', 'message']
 
 class BlogPostForm(forms.ModelForm):
     class Meta:

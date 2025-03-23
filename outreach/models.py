@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 
 
-from django.utils.text import slugify
-
 class BlogPost(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -108,11 +106,3 @@ class Donation(models.Model):
         return f"{self.user.username if self.user else 'Guest'} - {self.donation_type} - ${self.amount}"
 
 
-class ContactMessage(models.Model):
-    name = models.CharField(max_length=255)
-    email = models.EmailField()
-    message = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Message from {self.name} ({self.email})"

@@ -8,6 +8,7 @@ from .models import Donation, BlogPostImage
 from django.contrib import admin
 from django.contrib.admin import TabularInline
 
+
 # Custom BlogPost Admin
 class BlogPostAdmin(admin.ModelAdmin):
     list_display = ("title", "author", "created_at")
@@ -57,9 +58,9 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "subject", "submitted_at")
-    search_fields = ("name", "email", "subject")
-    readonly_fields = ("submitted_at",)
+    list_display = ("name", "email", "message", "submitted_at")  
+    search_fields = ("name", "email", "message")
+    readonly_fields = ("submitted_at",) 
 
 
 
