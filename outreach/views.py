@@ -62,14 +62,6 @@ def contact_view(request):
                 # Save the form
                 contact_message = form.save()
                 
-                # Send email notification
-                send_mail(
-                    subject=f"New Contact Form Submission: {contact_message.subject}",
-                    message=f"Name: {contact_message.name}\nEmail: {contact_message.email}\nMessage: {contact_message.message}",
-                    from_email=settings.EMAIL_HOST_USER,
-                    recipient_list=[settings.EMAIL_HOST_USER],  # Or your desired recipient
-                )
-                
                 messages.success(request, 'Your message has been sent successfully!')
                 return redirect('success_page')
             except Exception as e:
@@ -94,17 +86,6 @@ def submit_contact(request):
         
         # Save to the database
         ContactMessage.objects.create(name=name, email=email, message=message)
-
-        # Send email to admin
-        admin_email = settings.ADMIN_EMAIL  # Define this in settings.py
-        send_mail(
-            subject=f"New Contact Message from {name}",
-            message=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}",
-            from_email=settings.DEFAULT_FROM_EMAIL,  # Ensure you set this
-            recipient_list=[admin_email],
-            fail_silently=False,
-        )
-
         messages.success(request, "Your message has been sent successfully!")
         return redirect("contact")  # Redirect to contact page
 

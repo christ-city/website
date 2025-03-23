@@ -195,13 +195,3 @@ FLW_REDIRECT_URL = "https://www.christcityglobaloutreach.org/donation_confirm/"
 
 print(f"FLW_ENCRYPTION_KEY: {FLW_ENCRYPTION_KEY[:5]}...{FLW_ENCRYPTION_KEY[-5:]}")
 
-# Email Configuration
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER") 
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")  
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
