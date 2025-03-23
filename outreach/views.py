@@ -86,6 +86,7 @@ def submit_contact(request):
         
         # Save to the database
         ContactMessage.objects.create(name=name, email=email, message=message)
+
         messages.success(request, "Your message has been sent successfully!")
         return redirect("contact")  # Redirect to contact page
 
@@ -275,9 +276,9 @@ def process_donation(request):
 
         # Debug request before sending
         print("Sending payment request to Flutterwave...")
-        print("Headers:", headers)
-        print("Payment Data:", payment_data)
-        print(f"Using API key: {FLW_SECRET_KEY[:5]}...{FLW_SECRET_KEY[-5:]}")
+        
+        
+        
 
         response = requests.post(
             "https://api.flutterwave.com/v3/payments",
@@ -286,9 +287,7 @@ def process_donation(request):
         )
 
         # Debug response
-        print("Flutterwave Response Code:", response.status_code)
-        print(f"Using API key: {settings.FLW_SECRET_KEY[:10]}...{settings.FLW_SECRET_KEY[-5:]}")
-        print("Flutterwave Response:", response.json())
+        print("Flutterwave Response Code:", response.status_code) 
         print("Redirect URL:", settings.FLW_REDIRECT_URL)
 
 

@@ -193,5 +193,5 @@ FLW_SECRET_KEY = os.getenv("FLW_SECRET_KEY", "")
 FLW_ENCRYPTION_KEY = os.getenv("FLW_ENCRYPTION_KEY", "")
 FLW_REDIRECT_URL = "https://www.christcityglobaloutreach.org/donation_confirm/"
 
-print(f"FLW_ENCRYPTION_KEY: {FLW_ENCRYPTION_KEY[:5]}...{FLW_ENCRYPTION_KEY[-5:]}")
+
 
