@@ -32,7 +32,6 @@ load_dotenv(BASE_DIR / ".env")
 
 
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -186,7 +185,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "changeme")
 DEBUG = config("DEBUG", default=False, cast=bool)
 
 
-ALLOWED_HOSTS = ["global-vhly.onrender.com", "christcityglobaloutreach.org", "www.christcityglobaloutreach.org"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "global-vhly.onrender.com", "christcityglobaloutreach.org", "www.christcityglobaloutreach.org"]
 
 
 FLW_SECRET_KEY = os.getenv("FLW_SECRET_KEY", "")
