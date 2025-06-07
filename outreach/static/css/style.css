@@ -1202,6 +1202,31 @@ section.callaction {
   }
 }
 
+.partners-section {
+  padding: 4rem 0;
+  background: #f8f9fa;
+  text-align: center;
+}
+
+.section-heading {
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+  color: #343a40;
+}
+
+.partner-carousel img {
+  max-height: 80px;
+  margin: auto;
+  transition: transform 0.3s ease;
+  filter: grayscale(100%);
+}
+
+.partner-carousel img:hover {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+
 /* ===================================
 9. Section: Bottom
 ==================================== */

@@ -22,7 +22,8 @@
   <link href="static/css/bootstrap.css" rel="stylesheet" />
   <link href="static/css/bootstrap-responsive.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
-  <link href="static/css/jcarousel.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
   <link href="static/css/flexslider.css" rel="stylesheet" />
   <link href="static/css/cslider.css" rel="stylesheet" />
   <link href="static/css/style.css" rel="stylesheet" />
@@ -39,6 +40,8 @@
 
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 
 </head>
@@ -432,60 +435,26 @@ Donate Now
       <div class="section-divider divider4"></div>
       
         </section>
-        <div class="row">
-          <div class="span12">
-            <h4>Esteemed <strong>Partners</strong></h4>
-            <ul id="mycarousel" class="jcarousel-skin-tango recent-jcarousel clients">
-              <li>
-                <a href="#">
-					<img src="static/img/dummies/clients/client10.png" class="client-logo" alt="" />
-					</a>
-              </li>
-              <li>
-                <a href="#">
-					<img src="static/img/dummies/clients/client7.png" class="client-logo" alt="" />
-					</a>
-              </li>
-              <li>
-                <a href="#">
-					<img src="static/img/dummies/clients/client8.png" class="client-logo" alt="" />
-					</a>
-              </li>
-              <li>
-                <a href="#">
-					<img src="static/img/dummies/clients/client2.jfif" class="client-logo" alt="" />
-					</a>
-              </li>
-              <li>
-                <a href="#">
-					<img src="static/img/dummies/clients/client3.png" class="client-logo" alt="" />
-					</a>
-              </li>
-              <li>
-                <a href="#">
-					<img src="static/img/dummies/clients/client9.png" class="client-logo" alt="" />
-					</a>
-              </li>
-              <li>
-                <a href="#">
-					<img src="static/img/dummies/clients/client8.png" class="client-logo" alt="" />
-					</a>
-              </li>
-              <li>
-                <a href="#">
-					<img src="static/img/dummies/clients/client10.png" class="client-logo" alt="" />
-					</a>
-              </li>
-              <li>
-                <a href="#">
-					<img src="static/img/dummies/clients/client3.png" class="client-logo" alt="" />
-					</a>
-              </li>
-            </ul>
-          </div>
+        <section class="partners-section">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <h4 class="section-heading">Esteemed <strong>Partners</strong></h4>
+        <div class="partner-carousel">
+          <div><img src="static/img/dummies/clients/client10.png" class="client-logo" alt="Client 10" /></div>
+          <div><img src="static/img/dummies/clients/client7.png" class="client-logo" alt="Client 2" /></div>
+          <div><img src="static/img/dummies/clients/client8.png" class="client-logo" alt="Client 3" /></div>
+          <div><img src="static/img/dummies/clients/client2.jfif" class="client-logo" alt="Client 4" /></div>
+          <div><img src="static/img/dummies/clients/client3.png" class="client-logo" alt="Client 5" /></div>
+          <div><img src="static/img/dummies/clients/client7.png" class="client-logo" alt="Client 6" /></div>
+          <div><img src="static/img/dummies/clients/client8.png" class="client-logo" alt="Client 7" /></div>
+          <div><img src="static/img/dummies/clients/client10.png" class="client-logo" alt="Client 8" /></div>
+          <div><img src="static/img/dummies/clients/client3.png" class="client-logo" alt="Client 9" /></div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
     <section id="bottom">
       <div class="container">
         <div class="row">
@@ -650,6 +619,40 @@ document.addEventListener("click", function (e) {
         }
     });
     </script>
+    <script>
+  $(document).ready(function(){
+    $('.partner-carousel').slick({
+      slidesToShow: 5,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      arrows: false,
+      dots: false,
+      pauseOnHover: false,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 4,
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 3,
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 2,
+          }
+        }
+      ]
+    });
+  });
+</script>
+
     
 
 </body>
