@@ -136,78 +136,76 @@
 </div>
     <!-- end header -->
     <section id="featured">
-<!-- First Slider (DA Slider) -->
-<!-- start slider -->
-<div id="da-slider" class="da-slider">
-  <div class="da-slide">
-    <div class="slide-content">
-      <h2>Transforming Lives.</h2>
-      <p>
-        A Beacon of Hope for Underprivileged Girls & Orphans.  
-        For over 14 years, Christ City Global Outreach has been a lifeline of hope for underprivileged girls 
-        and orphans in Abuja, Nigeria. We believe that every child deserves a chance—a chance to learn, 
-        to dream, and to build a future free from the cycle of poverty.
-      </p>
-      <a href="#" class="da-link">Read more</a>
-    </div>
-    <div class="da-img">
-      <img src="{% static 'img/slides/parallax/ccgo2.png' %}" alt="ccgo2">
-    </div>
-  </div>
-</div>
-<style>
-  .da-slider {
-    background: url("{% static 'img/church-bg.png' %}") no-repeat center center;
-    background-size: cover;
-  }
-</style>
-  <div class="da-slide">
-    <h2>Why We Do What We Do</h2>
-    <p>
-      💛 Over 1,000 children educated through our free schooling programs. 
-      💛 Safe spaces for young girls to learn, grow, and thrive. 
-      💛 Orphan care & empowerment programs giving hope to the most vulnerable.
-      💛 Community outreach & feeding programs to fight poverty at its roots.
-    </p>
-    <a href="#" class="da-link">Read more</a>
-    <div class="da-img">
-      <div class="video-container">
-        <iframe src="https://player.vimeo.com/video/30585464?title=0&byline=0"></iframe>
-    </iframe>
+  <div class="slider-container">
+    <div class="slider-wrapper">
+      <div class="slide active">
+        <div class="slide-content">
+          <div class="text-container">
+            <h2>Transforming Lives.</h2>
+            <p>A Beacon of Hope for Underprivileged Girls & Orphans. For over 14 years, Christ City Global Outreach has been a lifeline of hope for underprivileged girls and orphans in Abuja, Nigeria.</p>
+            <a href="{% url 'about' %}" class="da-link">Read more</a>
+          </div>
+          <div class="da-img">
+            <img src="{% static 'img/slides/parallax/ccgo2.png' %}" alt="ccgo2">
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-content">
+          <div class="text-container">
+            <h2>Why We Do What We Do</h2>
+            <p>💛 Over 1,000 children educated through our free schooling programs. 💛 Safe spaces for young girls to learn, grow, and thrive. 💛 Orphan care & empowerment programs.</p>
+            <a href="{% url 'school' %}" class="da-link">Read more</a>
+          </div>
+          <div class="da-img">
+            <img src="{% static 'img/dummies/family-img.jpg' %}" alt="ccgo2">
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-content">
+          <div class="text-container">
+            <h2>Join Us in Making a Difference</h2>
+            <p>The future begins with compassion and action today. Whether through volunteering, or spreading the word, your support changes lives.</p>
+            <a href="{% url 'donate2' %}" class="da-link">🤝 Get Involved</a>
+          </div>
+          <div class="da-img">
+            <img src="{% static 'img/dummies/grate2-img.jpg' %}" alt="ccgo2">
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-content">
+          <div class="text-container">
+            <h2>We Exist For His Glory</h2>
+            <p>Our objective strengthened by our faith is to build a world where every child grows up in a safe and loving family.</p>
+            <a href="{% url 'blog_list' %}" class="da-link">Read more</a>
+          </div>
+          <div class="da-img">
+            <img src="{% static 'img/slides/parallax/CCGO1.jpg' %}" alt="ccgo">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="da-slide">
-    <h2>Join Us in Making a Difference</h2>
-    <p>
-      The future begins with compassion and action today. Whether through volunteering, or spreading the word, your support changes lives. 🌍 Together, we can break the chains of poverty.
-📚 Together, we can educate a generation.
-❤️ Together, we can make a lasting impact.
 
-Be part of the change today.
+    <!-- Navigation -->
+    <div class="slider-nav">
+      <button class="nav-btn prev-btn">‹</button>
+      <button class="nav-btn next-btn">›</button>
+    </div>
 
-Donate Now
-    </p>
-    <a href="#" class="da-link">🤝 Get Involved</a>
-    <div class="da-img">
-      <img src="static/img/slides/parallax/charity3.png" alt="image01" />
+    <!-- Dots indicator -->
+    <div class="slider-dots">
+      <span class="dot active" data-slide="0"></span>
+      <span class="dot" data-slide="1"></span>
+      <span class="dot" data-slide="2"></span>
+      <span class="dot" data-slide="3"></span>
     </div>
   </div>
-  <div class="da-slide">
-    <h2>We Exist For His Glory</h2>
-    <p>
-      Our objective strengthened by our faith is to build a world where every child grows up in a safe and loving family, in a third world country, with 17.5 million orphans according to Nigeria's Federal Ministry of Women Affairs and Social Development, it is imperative that we do our part in spreading the word of God and provide shelter for those in need. by providing a safe school for learning, and a church
-    </p>
-    <a href="#" class="da-link">Read more</a>
-    <div class="da-img">
-      <img src="static/img/slides/parallax/CCGO1.jpg" alt="image01" />
-    </div>
-  </div>
-  <nav class="da-arrows">
-    <span class="da-arrows-prev"></span>
-    <span class="da-arrows-next"></span>
-  </nav>
-</div>
+</section>
 <!-- end slider -->
 
 <section>
@@ -256,7 +254,7 @@ Donate Now
                     <p>
                       At Christ City Global Outreach, we believe in creating lasting change for underprivileged girls and orphans. For over 14 years, we have provided free education, shelter, and mentorship, empowering children to break free from poverty and build a brighter future. Join us in this mission. Every donation, every volunteer, and every act of kindness creates a ripple effect of hope.
                     </p>
-                    <a href="#">Learn more</a>
+                    <a href="{% url 'about' %}">Learn more</a>
                   </div>
                 </div>
               </div>
@@ -270,7 +268,7 @@ Donate Now
                     <p>
                       Education should be accessible to all, regardless of background. That’s why our programs are designed to be inclusive, responsive, and tailored to meet the needs of every child. From classroom learning to life skills training, we ensure that every girl and orphan in our care has the tools needed to thrive in an ever-changing world. Your support makes this possible.
                     </p>
-                    <a href="#">Learn more</a>
+                    <a href="{% url 'school' %}">Learn more</a>
                   </div>
                 </div>
               </div>
@@ -297,7 +295,7 @@ Donate Now
                     <p>
                       Imagine the joy of a child holding their first schoolbook. Picture the smile of an orphan who finally finds a safe place to call home. This is the power of your generosity. With Christ City Global Outreach, you don’t just give—you become part of a movement that transforms lives. Sit back, take it in, and know that your impact is real. Together, we create hope.
                     </p>
-                    <a href="#">Learn more</a>
+                    <a href="{% url 'donate2' %}">Learn more</a>
                   </div>
                 </div>
               </div>
@@ -328,7 +326,7 @@ Donate Now
                   <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
                     {% load static %}
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Christ City Renovation" href="{% static 'img/works/full/image-10-full.jpg' %}" alt="Christ City Renovation">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Christ City Renovation" href="{% url 'blog_list' %}"  alt="Christ City Renovation">
                       <span class="overlay-img"></span>
                       <span class="overlay-img-thumb font-icon-plus"></span>
                   </a>
@@ -341,7 +339,7 @@ Donate Now
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 design" data-id="id-1" data-type="icon">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Office" href="{% static 'img/works/full/image-01-full.jpg' %}">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Office" href="{% url 'blog_list' %}" >
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
@@ -352,7 +350,7 @@ Donate Now
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="{% static 'img/works/full/image-01-full.jpg' %}">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="{% url 'blog_list' %}" >
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
@@ -363,7 +361,7 @@ Donate Now
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="{% static 'img/works/full/image-01-full.jpg' %}">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="{% url 'blog_list' %}" >
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
@@ -374,7 +372,7 @@ Donate Now
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 photography" data-id="id-4" data-type="web">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Sea" href="{% static 'img/works/full/image-01-full.jpg' %}">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Sea" href="{% url 'blog_list' %}" >
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
@@ -385,7 +383,7 @@ Donate Now
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 photography" data-id="id-5" data-type="icon">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Clouds" href="{% static 'img/works/full/image-01-full.jpg' %}">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Clouds" href="{% url 'blog_list' %}" >
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
@@ -396,7 +394,7 @@ Donate Now
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="{% static 'img/works/full/image-01-full.jpg' %}">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="{% url 'blog_list' %}" >
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
@@ -407,7 +405,7 @@ Donate Now
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Dark" href="{% static 'img/works/full/image-01-full.jpg' %}">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Dark" href="{% url 'blog_list' %}" >
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
@@ -494,9 +492,9 @@ Donate Now
             <div class="widget">
               <h5 class="widgetheading">Important stuff</h5>
               <ul class="link-list">
-                <li><a href="#">Press release</a></li>
+                <li><a href="{% url 'donate2' %}">make a donation now</a></li>
                 <li><a href="{% url 'blog_list' %}">blog</a></li>
-                <li><a href="#">volunteer-Career center</a></li>
+                <li><a href="{% url 'contact' %}"> contact us about volunteer-Career</a></li>
               </ul>
             </div>
           </div>
@@ -545,6 +543,7 @@ Donate Now
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="/static/js/bootstrap.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/daslider.js' %}"></script>
   <script src="{% static 'js/custom.js' %}"></script>
   <script src="{% static 'js/scripts.js' %}"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -566,6 +565,55 @@ Donate Now
   <!-- Template Custom JavaScript File -->
   
   <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+  const slider = document.querySelector('.slider-wrapper');
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const prevBtn = document.querySelector('.prev-btn');
+  const nextBtn = document.querySelector('.next-btn');
+  
+  let currentSlide = 0;
+  const totalSlides = slides.length;
+
+  function updateSlider() {
+    slider.style.transform = `translateX(-${currentSlide * 20}%)`;
+    
+    slides.forEach((slide, index) => {
+      slide.classList.toggle('active', index === currentSlide);
+    });
+    
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentSlide);
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlider();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateSlider();
+  }
+
+  nextBtn.addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', prevSlide);
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentSlide = index;
+      updateSlider();
+    });
+  });
+
+  // Auto-play slider
+  setInterval(nextSlide, 5000);
+});
+
+
+
     document.addEventListener("DOMContentLoaded", function () {
 const dropdowns = document.querySelectorAll(".dropdown > a");
 

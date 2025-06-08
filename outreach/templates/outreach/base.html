@@ -96,70 +96,69 @@
         {% block content %}
         {% endblock %}
         <footer>
-          <div class="container">
-            <div class="row">
-              <div class="span3">
-                <div class="widget">
-                  <h5 class="widgetheading">Browse pages</h5>
-                  <ul class="link-list">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">School</a></li>
-                    <li><a href="#">Meet our team</a></li>
-                    <li><a href="#">donate</a></li>
-                    <li><a href="#">Get in touch with us</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="span3">
-                <div class="widget">
-                  <h5 class="widgetheading">Important stuff</h5>
-                  <ul class="link-list">
-                    <li><a href="#">Press release</a></li>
-                    <li><a href="#">blog</a></li>
-                    <li><a href="#">volunteer-Career center</a></li>
-                    
-                  </ul>
-                </div>
-              </div>
-              <div class="span3">
-                <div class="widget">
-                  <h5 class="widgetheading">Get in touch with us</h5>
-                  <address>
-                    <strong>Christ City Global Outreach International</strong><br>
-                    Behind former Lugbe customary court Lugbe FHA.<br>
-                    Airport road. Abuja FCT
-                   </address>
-                  <p>
-                    <i class="icon-phone"></i> Tel: +234-809-827-3767<br>
-                    <i class="icon-envelope-alt"></i> christcityglobal@yahoo.com
-                  </p>
-                </div>
-              </div>
+      <div class="container">
+        <div class="row">
+          <div class="span3">
+            <div class="widget">
+              <h5 class="widgetheading">Browse pages</h5>
+              <ul class="link-list">
+                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'school' %}">School</a></li>
+                <li><a href="{% url 'about' %}">Meet our team</a></li>
+                <li><a href="{% url 'donate2' %}">donate</a></li>
+                <li><a href="{% url 'contact' %}">Get in touch with us</a></li>
+              </ul>
             </div>
           </div>
-          <div id="sub-footer">
-            <div class="container">
-              <div class="row">
-                <div class="span6">
-                  <div class="copyright">
-                    <p>
-                      <span>&copy; christ city - All right reserved.</span>
-                    </p>
-                  </div>
-                </div>
-                <div class="span6">
-                  <ul class="social-network">
-                    <li><a href="#" data-placement="bottom" title="Facebook"><i class="icon-facebook icon-square"></i></a></li>
-                    <li><a href="#" data-placement="bottom" title="Twitter"><i class="icon-twitter icon-square"></i></a></li>
-                    <li><a href="#" data-placement="bottom" title="Linkedin"><i class="icon-linkedin icon-square"></i></a></li>
-                    <li><a href="#" data-placement="bottom" title="Pinterest"><i class="icon-pinterest icon-square"></i></a></li>
-                    <li><a href="#" data-placement="bottom" title="Google plus"><i class="icon-google-plus icon-square"></i></a></li>
-                  </ul>
-                </div>
-              </div>
+          <div class="span3">
+            <div class="widget">
+              <h5 class="widgetheading">Important stuff</h5>
+              <ul class="link-list">
+                <li><a href="{% url 'donate2' %}">make a donation now</a></li>
+                <li><a href="{% url 'blog_list' %}">blog</a></li>
+                <li><a href="{% url 'contact' %}"> contact us about volunteer-Career</a></li>
+              </ul>
             </div>
           </div>
-        </footer>
+          <div class="span3">
+            <div class="widget">
+              <h5 class="widgetheading">Get in touch with us</h5>
+              <address>
+								<strong>Christ City Global Outreach International</strong><br>
+                Behind former Lugbe customary court Lugbe FHA.<br>
+                Airport road. Abuja FCT
+					 		</address>
+              <p>
+                <i class="icon-phone"></i> Tel: +234-809-827-3767<br>
+                <i class="icon-envelope-alt"></i> christcityglobal@yahoo.com
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="sub-footer">
+        <div class="container">
+          <div class="row">
+            <div class="span6">
+              <div class="copyright">
+                <p>
+                  <span>&copy; christ city - All right reserved.</span>
+                </p>
+              </div>
+            </div>
+            <div class="span6">
+              <ul class="social-network">
+                <li><a href="#" data-placement="bottom" title="Facebook"><i class="icon-facebook icon-square"></i></a></li>
+                <li><a href="#" data-placement="bottom" title="Twitter"><i class="icon-twitter icon-square"></i></a></li>
+                <li><a href="#" data-placement="bottom" title="Linkedin"><i class="icon-linkedin icon-square"></i></a></li>
+                <li><a href="#" data-placement="bottom" title="Pinterest"><i class="icon-pinterest icon-square"></i></a></li>
+                <li><a href="#" data-placement="bottom" title="Google plus"><i class="icon-google-plus icon-square"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
     </div>
 
     <!-- JavaScript -->

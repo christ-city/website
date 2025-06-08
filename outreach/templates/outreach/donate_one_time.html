@@ -11,7 +11,6 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background: #f4f4f4;
       color: #333;
       margin: 0;
       padding: 0;
@@ -22,10 +21,10 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
-            padding: 40px 0;
+            padding: 20px 0;
             width: 100%;
             max-width: 1200px;
-            margin: 20px;
+            margin: 10px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
@@ -76,7 +75,7 @@
         }
 
         .inner-heading h2 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
              color: #2c3e50;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -89,7 +88,7 @@
         }
 
         .inner-heading-right h2 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: #2c3e50;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -274,8 +273,13 @@
             }
             
             .inner-heading h2, .inner-heading-right h2 {
-                font-size: 2.5rem;
+                font-size: 1.8rem;
                 text-align: center;
+            }
+
+            #inner-headline {
+                padding: 15px 0; 
+                margin: 10px;
             }
         
             
@@ -287,7 +291,7 @@
 
          @media (max-width: 480px) {
             .inner-heading h2, .inner-heading-right h2 {
-                font-size: 2rem;
+                font-size: 1.5rem;
                 text-align: center;
             }
         
@@ -439,7 +443,7 @@
                 </div>
                 <div class="span8">
                     <ul class="breadcrumb">
-                        <li><a href="#"><i class="icon-home"></i> Home</a><i class="icon-angle-right"></i></li>
+                        <li><a href="{% url 'index' %}"><i class="icon-home"></i> Home</a><i class="icon-angle-right"></i></li>
                         <li class="active">Donate</li>
                     </ul>
                 </div>

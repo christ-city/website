@@ -821,198 +821,171 @@ header ul.nav li ul li ul {
 6. Sliders
 ==================================== */
 
-/* === DA SLIDER STYLING === */
-.da-slider {
+.slider-container {
   position: relative;
   width: 100%;
-  height: 450px; /* Reduced height for a more professional look */
-  background: url("../img/church-bg.png") no-repeat center center;
+  height: 500px;
+  background: url("/static/img/church-bg.png") no-repeat center center;
   background-size: cover;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.slider-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1;
+}
+
+.slider-wrapper {
+  position: relative;
+  width: 500%;
+  height: 100%;
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+.slide {
+  width: 20%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px; /* Reduced padding */
-  overflow: hidden; /* Prevents right-side scrolling */
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
 
-.da-slide {
-  position: relative;
-  background: url("../img/church-bg.png") no-repeat center center;
-  color: white;
+.slide.active {
+  opacity: 1;
+}
+
+.slide-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 85%;
+  width: 90%;
   max-width: 1100px;
-  margin: auto;
-  flex-wrap: wrap;
+  gap: 40px;
 }
 
-.da-slide .text-container {
-  width: 50%;
+.text-container {
+  flex: 1;
   color: white;
-  text-align: left;
-  padding-left: 15px;
-  position: relative;
+  z-index: 3;
 }
 
-.da-slide h2 {
-  font-size: 48px; /* Increased size for visibility */
-  font-weight: bold;
+.text-container h2 {
+  font-size: 3rem;
+  font-weight: 700;
   margin-bottom: 20px;
   line-height: 1.2;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  animation: slideInLeft 0.8s ease-out;
 }
 
-.da-slide p {
-  font-size: 18px;
+.text-container p {
+  font-size: 1.1rem;
   line-height: 1.6;
-  max-width: 90%;
   margin-bottom: 25px;
-  padding-bottom: 10px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+  animation: slideInLeft 0.8s ease-out 0.2s both;
 }
 
-/* READ MORE BUTTON */
-.da-slide .da-link {
-  display: inline-block;
-  background: linear-gradient(135deg, #00CED1, #87CEEB);
-  color: white;
-  padding: 8px 16px; /* Smaller padding for a compact look */
-  border-radius: 25px; /* Pill-shaped rectangle */
-  margin-top: 15px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 14px; /* Smaller font size */
-  border: none;
-  cursor: pointer;
-  transition: 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-}
-
-.da-slide .da-link:hover {
-  background: linear-gradient(135deg, #87CEEB, #00CED1); /* Reverse gradient on hover */
-  transform: translateY(-2px); /* Slight lift effect */
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
-}
-
-/* RIGHT SECTION: Image */
-.da-slide .da-img {
-  width: 50%; /* Keeps the image in frame */
-  display: flex;
-  justify-content: center; /* Centers image inside container */
-  align-items: center;
-  padding-right: 0px;
-}
-
-.da-slide .da-img img {
-  max-width: 100%;
-  height: auto;
-  transition: transform 0.4s ease-in-out;
-  border-radius: 10px;
-}
-
-/* Hover Effect to Enlarge Image */
-.da-slide .da-img img:hover {
-  transform: scale(1.1); /* Increase size on hover */
-}
-
-body, html {
-  overflow-x: hidden; /* Prevents right-side scrolling */
-}
-
-/* === FIX HEADER NAVIGATION DISAPPEARING === */
-.nav-links {
+.da-img {
+  flex: 1;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* Ensures navigation wraps instead of disappearing */
+  align-items: center;
+  animation: slideInRight 0.8s ease-out 0.4s both;
 }
 
-/* === RESPONSIVE DESIGN FIXES === */
-/* Adjust Navigation Arrows for Mobile */
+.da-img img, .da-img iframe {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Navigation buttons */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 4;
+  transform: translateY(-50%);
+}
+
+.nav-btn {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.nav-btn:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.1);
+}
+
+/* Dots indicator */
+.slider-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 4;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: white;
+  transform: scale(1.2);
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Mobile responsive */
 @media (max-width: 768px) {
-  .da-slider {
-      height: auto;
-      padding-bottom: 20px;
-  }
-
-  .da-slide {
-      padding: 15px;
-  }
-
-  .da-slide h2 {
-      font-size: 20px;
-  }
-
-  .da-slide p {
-      font-size: 14px;
-      max-width: 90%;
-  }
-
-  .da-img img {
-      max-width: 80%;
-  }
-
-  /* Position Arrows on Mobile */
-  .da-arrows {
-      display: flex;
-      justify-content: space-between;
-      position: absolute;
-      width: 100%;
-      top: 50%;
-      transform: translateY(-50%);
-      padding: 0 10px;
-  }
-
-  .da-arrows span {
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      padding: 10px;
-      border-radius: 50%;
-      cursor: pointer;
-  }
+  .slider-container { height: 400px; }
+  .slide-content { flex-direction: column; text-align: center; }
+  .text-container h2 { font-size: 2rem; }
+  .text-container p { font-size: 1rem; }
+  .nav-btn { width: 40px; height: 40px; font-size: 1.5rem; }
 }
-
-@media screen and (max-width: 1024px) {
-  .da-slider {
-    height: 450px;
-  }
-  .da-slide {
-    flex-direction: column; /* Stack text & image on top of each other */
-    text-align: center;
-  }
-  .da-slide .text-container {
-    width: 90%; /* Increase width on smaller screens */
-    text-align: center;
-  }
-  .da-slide h2 {
-    font-size: 28px; /* Reduce title size for mobile */
-  }
-  .da-slide p {
-    font-size: 14px;
-  }
-  .da-slide .da-img {
-    width: 100%;
-  }
-  .da-slide .da-img img {
-    max-width: 280px; /* Ensure image doesn’t shrink too much */
-  }
-}
-
-/* Fix Navigation Menu on Mobile */
-@media screen and (max-width: 768px) {
-  .da-slider {
-    height: 400px;
-  }
-  .nav-links {
-    flex-direction: column; /* Stack navigation items */
-    text-align: center;
-  }
-  .nav-links li {
-    margin-bottom: 5px;
-  }
-}
-
 
 /* ===================================
 7. Section: call action
