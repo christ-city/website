@@ -12,33 +12,24 @@
 
     <!-- Page Header -->
     <section id="inner-headline">
-        <div class="container">
-          <div class="row">
-            <div class="span4">
-              <div class="inner-heading">
-                <h2>Make a Difference</h2>
-              </div>
-            </div>
-            <div class="span8">
-              <ul class="breadcrumb">
-                <li><a href="{% url 'index' %}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
-                <li class="active">Donate</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <div class="animated-headline">
+    <div class="animated-title">Make a Difference</div>
+    <div class="animated-subtitle">Touch a Child's Life Today</div>
+</div>
+<div class="inner-heading">
+    <h4>Choose Your <strong>Monthly Donation</strong></h4>
+</div>
+</div>
     </section>
 
     <!-- Donation Section -->
     <section id="content">
         <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <h4>Choose Your <strong> Monthly Donation</strong></h4>
-                </div>
-            </div>
+            
 
             <!-- Donation Plans -->
+        <div class="outer-donation-card">
+            
             <div class="donation-row">
                 
                 <!-- One-Time Donation -->
@@ -118,14 +109,18 @@
                         </form>
                     </div>
                 </div>
-
             </div>
+
+        </div>
 
             <!-- Divider -->
             <div class="row">
                 <div class="span12">
                     <div class="solidline"></div>
                 </div>
+            </div>
+            <div class="inner-heading">
+                <h4>All donations are secure and tax-deductible. Thank you for your faithful support!</h4>
             </div>
             <p>
                 <a href="{% url 'index' %}" class="home-btn">← Go Back Home</a>

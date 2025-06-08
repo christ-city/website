@@ -2,150 +2,560 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Make a Donation</title>
-    <link rel="stylesheet" href="{% static 'css/donate.css' %}">
-    <script src="{% static 'js/donate.js' %}"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Make a Donation</title>
+  <link rel="stylesheet" href="{% static 'css/donate.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="{% static 'js/donate.js' %}" defer></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+     #inner-headline {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px 0;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #inner-headline::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+            background-size: 300% 300%;
+            border-radius: 20px;
+            z-index: -1;
+            animation: gradientShift 4s ease infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .span4 {
+            flex: 0 0 33.333%;
+            min-width: 250px;
+        }
+
+        .span8 {
+            flex: 0 0 66.666%;
+            min-width: 250px;
+        }
+
+        .inner-heading h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+             color: #2c3e50;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInLeft 1s ease-out, pulse 2s ease-in-out infinite alternate;
+            background: linear-gradient(45deg, #2c3e50, #34495e, #2c3e50);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .inner-heading-right h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInRight 1s ease-out, pulse 2s ease-in-out infinite alternate;
+            background: linear-gradient(45deg, #2c3e50, #34495e, #2c3e50);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: right;
+        }
+
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .breadcrumb {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: flex-end;
+            animation: slideInRight 1s ease-out 0.3s both;
+        }
+
+        .breadcrumb li {
+            position: relative;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .breadcrumb li:nth-child(1) { animation-delay: 0.5s; }
+        .breadcrumb li:nth-child(2) { animation-delay: 0.7s; }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .breadcrumb a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb .active {
+            color: #ffd700;
+            font-weight: 600;
+            padding: 12px 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes glow {
+            0% { 
+                box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            }
+            100% { 
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        .icon-home::before {
+            content: '🏠';
+            font-size: 1.2em;
+        }
+
+        .icon-angle-right::before {
+            content: '▶';
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.6);
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(3px); }
+        }
+
+        /* Floating particles animation */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) {
+            width: 4px;
+            height: 4px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 6px;
+            height: 6px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            width: 3px;
+            height: 3px;
+            top: 40%;
+            left: 60%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.8;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .span4, .span8 {
+                flex: 1 1 100%;
+            }
+            
+            .inner-heading h2, .inner-heading-right h2 {
+                font-size: 2.5rem;
+                text-align: center;
+            }
+        
+            
+            .breadcrumb {
+                justify-content: center;
+                margin-top: 20px;
+            }
+        }
+
+         @media (max-width: 480px) {
+            .inner-heading h2, .inner-heading-right h2 {
+                font-size: 2rem;
+                text-align: center;
+            }
+        
+            
+            .breadcrumb {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+    #content {
+      padding: 40px 20px;
+    }
+
+    .donation-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .pricing-box-alt {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 350px;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-heading {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .pricing-heading h3 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+
+    .pricing-terms {
+      background: #f8f9fa;
+      padding: 10px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .pricing-content {
+      padding: 20px;
+    }
+
+    .pricing-content ul {
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .pricing-content ul li {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.95rem;
+    }
+
+    .pricing-content ul li:last-child {
+      border-bottom: none;
+    }
+
+    .donation-form {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      background: #fafafa;
+    }
+
+    .donation-input {
+      padding: 12px;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: border 0.3s;
+    }
+
+    .donation-input:focus {
+      border-color: #667eea;
+      outline: none;
+    }
+
+    .donate-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      padding: 12px;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .donate-btn:hover {
+      background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+    }
+
+    .home-btn {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #667eea;
+      font-weight: bold;
+    }
+
+    .solidline {
+      height: 2px;
+      background: #eee;
+      margin: 40px 0;
+    }
+
+    @media (max-width: 768px) {
+      .donation-row {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Page Header -->
-    <section id="inner-headline">
+  <!-- Page Header -->
+  <section id="inner-headline">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        
         <div class="container">
-          <div class="row">
-            <div class="span4">
-              <div class="inner-heading">
-                <h2>Make a Difference</h2>
-              </div>
+            <div class="row">
+                <div class="span4">
+                    <div class="inner-heading">
+                        <h2>Make a Difference</h2>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="inner-heading-right">
+                        <h2>Touch a Child's Life Today</h2>
+                    </div>
+                </div>
+                <div class="span8">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home"></i> Home</a><i class="icon-angle-right"></i></li>
+                        <li class="active">Donate</li>
+                    </ul>
+                </div>
             </div>
-            <div class="span8">
-              <ul class="breadcrumb">
-                <li><a href="{% url 'index' %}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
-                <li class="active">Donate</li>
-              </ul>
-            </div>
+        </div>
+    </section>
+
+  <!-- Donation Section -->
+  <section id="content">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <h4>Choose Your <strong>ONE TIME Donation</strong></h4>
+        </div>
+      </div>
+
+      <div class="donation-row">
+
+        <!-- Partner Donation -->
+        <div class="pricing-box-alt special donation-box">
+          <div class="pricing-heading">
+            <h3>Become <strong>A Partner</strong></h3>
           </div>
+          <div class="pricing-terms">
+            <h6>Input Preferred Amount</h6>
+          </div>
+          <div class="pricing-content">
+            <ul>
+              <li>🩺 Funds healthcare checkups for an entire orphanage.</li>
+              <li>🍲 Provides emergency food support for struggling families.</li>
+              <li>🛠️ Funds vocational training programs for underprivileged youth.</li>
+            </ul>
+          </div>
+          <form method="POST" class="donation-form">
+            {% csrf_token %}
+            <input type="hidden" name="donation_type" value="one-time">
+            <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
+            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
+          </form>
         </div>
-    </section>
 
-    <!-- Donation Section -->
-    <section id="content">
-        <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <h4>Choose Your <strong> ONE TIME Donation</strong></h4>
-                </div>
-            </div>
-
-            <!-- Donation Plans -->
-            <div class="donation-row">
-                
-                <!-- One-Time Donation -->
-                <div class="pricing-box-alt special donation-box" data-type="one-time">
-                    <div class="pricing-heading">
-                        <h3>Become <strong>A Partner</strong></h3>
-                    </div>
-                    <div class="pricing-terms">
-                        <h6>Input Preffered Amount</h6>
-                    </div>
-                    <div class="pricing-content">
-                        <ul>
-                            <li>🩺 Funds healthcare checkups for an entire orphanage.</li>
-                            <li>🍲 Provides emergency food support for struggling families.</li>
-                            <li>🛠️ Funds vocational training programs for underprivileged youth.</li>
-                        </ul>
-                    </div>
-                    <div class="donation-box">
-                        <form method="POST" class="donation-form">
-                            {% csrf_token %}
-                            <input type="hidden" name="donation_type" value="one-time">
-                            <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
-                            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
-                        </form>
-                    </div>
-                <div class="pricing-box-alt special donation-box" data-type="one-time">
-                    <div class="pricing-heading">
-                        <h3><strong>Empower a Classroom</strong></h3>
-                    </div>
-                    <div class="pricing-terms">
-                        <h6>$250</h6>
-                    </div>
-                    <div class="pricing-content">
-                        <ul>
-                            <li>📚 Provides schoolbooks & supplies for <strong>30 children</strong> for one month.</li>
-                            <li>👕 Covers uniforms, socks, books, textbooks and sweaters for students.</li>
-                            <li>🍎 Supports a month of school meals for underprivileged children.</li>
-                        </ul>
-                    </div>
-                    <div class="donation-box">
-                        <form method="POST" class="donation-form">
-                            {% csrf_token %}
-                            <input type="hidden" name="donation_type" value="one-time">
-                            <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
-                            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Major Giving -->
-                <div class="pricing-box-alt donation-box" data-type="major">
-                    <div class="pricing-heading">
-                        <h3>Major help <strong>Train 30 Kids for an Entire Term</strong></h3>
-                    </div>
-                    <div class="pricing-terms">
-                        <h6>$1000</h6>
-                    </div>
-                    <div class="pricing-content">
-                        <ul>
-                            <li>📖 Covers tuition, books, and feeding for <strong>30 children</strong> for an entire term.</li>
-                            <li>🏡 Provides temporary shelter for children without homes.</li>
-                            <li>📦 Funds a community intervention for disaster relief.</li>
-                            <li>💼 Helps supply new school uniforms & shoes, new items, and school supplies. school excursions and new experiences are provided</li>
-                        </ul>
-                    </div>
-                    <div class="donation-box">
-                        <form method="POST" class="donation-form">
-                            {% csrf_token %}
-                            <input type="hidden" name="donation_type" value="one-time">
-                            <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
-                            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Divider -->
-            <div class="row">
-                <div class="span12">
-                    <div class="solidline"></div>
-                </div>
-            </div>
-            <p>
-                <a href="{% url 'index' %}" class="home-btn">← Go Back Home</a>
-            </p>
+        <!-- Empower a Classroom -->
+        <div class="pricing-box-alt special donation-box">
+          <div class="pricing-heading">
+            <h3><strong>Empower a Classroom</strong></h3>
+          </div>
+          <div class="pricing-terms">
+            <h6>$250</h6>
+          </div>
+          <div class="pricing-content">
+            <ul>
+              <li>📚 Schoolbooks & supplies for <strong>30 children</strong>.</li>
+              <li>👕 Uniforms, books, socks, sweaters, and shoes.</li>
+              <li>🍎 Meals for underprivileged students for 1 month.</li>
+            </ul>
+          </div>
+          <form method="POST" class="donation-form">
+            {% csrf_token %}
+            <input type="hidden" name="donation_type" value="one-time">
+            <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
+            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
+          </form>
         </div>
-    </section>
 
-    <script src="{% static 'js/donate.js' %}" defer></script>
- 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            document.querySelectorAll("form").forEach(form => {
-                form.addEventListener("submit", function (event) {
-                    const amountInput = this.querySelector('input[name="amount"]');
-                    const amount = parseFloat(amountInput.value);
-        
-                    if (!amount || isNaN(amount) || amount <= 0) {
-                        alert("Please enter a valid donation amount greater than $0.");
-                        event.preventDefault(); // Stop the form submission
-                    }
-                });
-            });
+        <!-- Major Giving -->
+        <div class="pricing-box-alt donation-box">
+          <div class="pricing-heading">
+            <h3>Train 30 Kids <strong>for a Term</strong></h3>
+          </div>
+          <div class="pricing-terms">
+            <h6>$1000</h6>
+          </div>
+          <div class="pricing-content">
+            <ul>
+              <li>📖 Tuition, books, and feeding for 30 children.</li>
+              <li>🏡 Shelter for children without homes.</li>
+              <li>📦 Community intervention & disaster relief.</li>
+              <li>💼 Uniforms, school supplies, excursions, and more.</li>
+            </ul>
+          </div>
+          <form method="POST" class="donation-form">
+            {% csrf_token %}
+            <input type="hidden" name="donation_type" value="one-time">
+            <input type="number" name="amount" class="donation-input" placeholder="Enter Amount ($)" required>
+            <button type="submit" class="btn btn-theme donate-btn"><i class="icon-bolt"></i> Donate Now</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Divider -->
+      <div class="row">
+        <div class="span12">
+          <div class="solidline"></div>
+        </div>
+      </div>
+      <p>
+        <a href="{% url 'index' %}" class="home-btn">← Go Back Home</a>
+      </p>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll("form").forEach(form => {
+        form.addEventListener("submit", function (event) {
+          const amountInput = this.querySelector('input[name="amount"]');
+          const amount = parseFloat(amountInput.value);
+
+          if (!amount || isNaN(amount) || amount <= 0) {
+            alert("Please enter a valid donation amount greater than $0.");
+            event.preventDefault(); // Stop the form submission
+          }
         });
-        </script>
-             
-        
+      });
+    });
+  </script>
 </body>
 </html>
