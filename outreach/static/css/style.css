@@ -509,6 +509,33 @@ h1 {
   }
 }
 
+.btn-modern-red {
+  display: inline-block;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #e53935, #d32f2f);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 8px 20px rgba(211, 47, 47, 0.3);
+  transition: all 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+
+.btn-modern-red:hover {
+  background: linear-gradient(135deg, #c62828, #b71c1c);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(183, 28, 28, 0.4);
+}
+
+.btn-modern-red:active {
+  transform: scale(0.97);
+}
+
 /* ===================================
 3. Responsive media
 ==================================== */
