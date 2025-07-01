@@ -164,11 +164,18 @@ def login_view(request):
         if user is not None:
             # If authentication is successful, log the user in and redirect
             login(request, user)
+            remember_me = request.POST.get('remember_me') == 'on'
+            if not remember_me:
+                
+                request.session.set_expiry(0)
+            else:
+                
+                request.session.set_expiry(1209600) 
             messages.success(request, f"Welcome back, {username}!")
-            return redirect("index")  # Redirect to index page after login
+            return redirect("index")  
         else:
             messages.error(request, "Invalid credentials. Please try again.")
-            return render(request, 'outreach/login.html')  # Or whatever template you're using
+            return render(request, 'outreach/login.html')  
 
     return render(request, 'outreach/login.html')
 

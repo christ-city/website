@@ -14,7 +14,7 @@
             <h2>Welcome to Christ City Global</h2>
             <p class="subtitle">Sign in to continue your journey.</p>
 
-            <!-- ✅ Display Messages -->
+            
             {% if messages %}
                 <div class="alert-messages">
                     {% for message in messages %}
@@ -23,7 +23,7 @@
                 </div>
             {% endif %}
 
-            <!-- ✅ Login Form -->
+            
             <form method="POST" action="{% url 'login' %}?next={{ next }}">
                 {% csrf_token %}
                 <div class="input-group">
@@ -31,6 +31,10 @@
                 </div>
                 <div class="input-group">
                     <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="input-group" style="display: flex; align-items: center; gap: 5px;">
+                    <input type="checkbox" name="remember_me" id="remember_me">
+                    <label for="remember_me" style="font-size: 14px;">Remember Me</label>
                 </div>
                 <button type="submit" class="auth-btn">Login</button>
             </form>
