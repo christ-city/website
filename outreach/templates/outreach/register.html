@@ -6,32 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style3.css' %}">
 </head>
 <body>
-    <div class="auth-wrapper">
-        <h2>Create an Account</h2>
-        <p>Join us today and be part of the Christ City family.</p>
+    <div class="login-container">
+    <div class="login-header">
+        <h2 class="login-title">Create an Account</h2>
+        <p class="login-subtitle">Join us today and be part of the Christ City family.</p>
 
     {% if messages %}
+    <div class="alert-messages">
         <ul>
             {% for message in messages %}
                 <li>{{ message }}</li>
             {% endfor %}
         </ul>
+    </div>
     {% endif %}
 
     <form method="POST">
         {% csrf_token %}
+        <div class="input-group">
         <input type="text" name="username" placeholder="Username" required>
+        <div class="input-icon">👤</div>
+        </div>
+        <div class="input-group">
         <input type="email" name="email" placeholder="Email" required>
+        <div class="input-icon">✉️</div>
+        </div>
+        <div class="input-group">
         <input type="password" name="password1" placeholder="Password" required>
+        <div class="input-icon">🔒</div>
+        </div>
+        <div class="input-group">
         <input type="password" name="password2" placeholder="Confirm Password" required>
-        <button type="submit" class="auth-btn">Register</button>
+        <div class="input-icon">🔒</div>
+        </div>
+        <button type="submit" class="login-button">Register</button>
     </form>
 
 
     <p class="toggle-text">Already have an account? <a href="{% url 'login' %}" style="color: #ff6b6b;">Login here</a></p>
+</div>
 
 
     <script src="{% static 'js/script2.js' %}"></script>
