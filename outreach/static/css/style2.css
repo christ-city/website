@@ -1,8 +1,8 @@
-/* ======= Modern Glassmorphism Login & Register ======= */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background: url("../img/church-bg.png") no-repeat center center;
     background-size: cover;
     height: 100vh;
