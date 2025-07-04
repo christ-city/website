@@ -650,28 +650,16 @@ document.addEventListener("click", function (e) {
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const menuToggle = document.getElementById("menu-toggle");
-        const navLinks = document.getElementById("nav-links");
-  
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+
+    if (menuToggle && navLinks) {
         menuToggle.addEventListener("click", function () {
             navLinks.classList.toggle("menu-open");
         });
-    });
+    }
+});
   </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const loginBtn = document.querySelector("#signin-btn"); // Make sure the ID is correct
-        const loginModal = document.querySelector("#myLogin"); // Ensure the modal exists
-    
-        if (loginBtn && loginModal) {
-            loginBtn.addEventListener("click", function () {
-                $("#myLogin").modal("show"); // Open modal
-            });
-        } else {
-            console.warn("Sign-in button or modal not found");
-        }
-    });
-    </script>
     <script>
   $(document).ready(function(){
     $('.partner-carousel').slick({

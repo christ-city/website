@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const authContainer = document.querySelector(".auth-wrapper");
     const authButtons = document.querySelectorAll(".auth-btn");
     const authInputs = document.querySelectorAll(".auth-input");
-    const toggleButton = document.querySelector(".toggle");
+    
     
 
     // Smooth button press effect
@@ -15,16 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    toggleButton.addEventListener("click", function () {
-        if (container.style.transform === "translateX(0%)") {
-            container.style.transform = "translateX(-50%)";
-            toggleButton.textContent = "Switch to Login";
-        } else {
-            container.style.transform = "translateX(0%)";
-            toggleButton.textContent = "Switch to Register";
-        }
-    });
-
+    
     // Input field animations
     authInputs.forEach(input => {
         input.addEventListener("focus", function () {
