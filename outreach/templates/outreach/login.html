@@ -57,18 +57,15 @@
 
     <script src="{% static 'js/script2.js' %}"></script>
     <script>
-        const loginToggle = document.getElementById("login-toggle");
-        const registerToggle = document.getElementById("register-toggle");
-        const authContainer = document.querySelector(".auth-container");
-        
-        loginToggle.addEventListener("click", () => {
-            authContainer.classList.remove("active");
-        });
-        
-        registerToggle.addEventListener("click", () => {
-            authContainer.classList.add("active");
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const username = document.querySelector('input[name="username"]');
+            const password = document.querySelector('input[name="password"]');
+            
+            username.value = username.value.trim();
+            password.value = password.value.trim();
         });
     </script>
+    
 
 
 </body>

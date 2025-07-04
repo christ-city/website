@@ -100,10 +100,10 @@ def register_view(request):
         return redirect("index")
     
     if request.method == "POST":
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+        username = request.POST.get('username').strip()
+        email = request.POST.get('email').strip()
+        password1 = request.POST.get('password1').strip()
+        password2 = request.POST.get('password2').strip()
         
         # Debugging the values you're getting (optional)
         print(f"Received: {username}, {email}, {password1}, {password2}")
