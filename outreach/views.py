@@ -453,6 +453,8 @@ def add_comment(request, post_id):
 def create_blog_post(request):
     if request.method == "POST":
         print("🔄 Received POST request")
+        print("Saving post for:", request.user.username)
+        print("Title:", blog_post.title)
         form = BlogPostForm(request.POST, request.FILES)
         files = request.FILES.getlist('images')  
 
@@ -460,6 +462,8 @@ def create_blog_post(request):
             blog_post = form.save(commit=False)
             blog_post.author = request.user
             blog_post.save()
+            print("All posts now:")
+            print(BlogPost.objects.all())
 
             
             for f in files:

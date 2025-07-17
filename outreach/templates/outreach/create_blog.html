@@ -53,13 +53,35 @@
 <div class="form-container">
     <h2>Create a Blog Post</h2>
     <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <label>Upload Images:</label>
-        <input type="file" name="images" multiple>
-        <button type="submit">Submit Blog Post</button>
-    </form>
+    {% csrf_token %}
+    {{ form.as_p }}
 
+    {% if form.errors %}
+        <div class="form-errors">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    
+    <label>Cover Image:</label>
+    {{ form.image }}
+
+    {{ form.title }}
+    {{ form.content }}
+
+    <label>Upload Extra Images:</label>
+    <input type="file" name="images" multiple>
+
+    <button type="submit">Submit Blog Post</button>
+</form>
     <p>
         <a href="{% url 'blog_list' %}" class="home-btn">Back TO BLOG </a>
     </p>
