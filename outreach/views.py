@@ -452,6 +452,7 @@ def add_comment(request, post_id):
 @login_required
 def create_blog_post(request):
     if request.method == "POST":
+        print("🔄 Received POST request")
         form = BlogPostForm(request.POST, request.FILES)
         files = request.FILES.getlist('images')  
 
@@ -461,14 +462,16 @@ def create_blog_post(request):
             blog_post.save()
 
             
-            for file in files:
-                BlogPostImage.objects.create(blog_post=blog_post, image=file)
+            for f in files:
+                BlogPostImage.objects.create(blog_post=blog_post, image=f)
 
             messages.success(request, "Your blog post has been published!")
             return redirect('blog_list')
+        else:
+            print("Form Errors:", form.errors)
     else:
         form = BlogPostForm()
-
+    
     return render(request, 'create_post.html', {'form': form})
 
 @login_required

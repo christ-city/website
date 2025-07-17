@@ -11,7 +11,7 @@ class ContactForm(ModelForm):
 class BlogPostForm(forms.ModelForm):
     class Meta:
         model = BlogPost
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'image']
     
     def save(self, commit=True):
         blog_post = super().save(commit=False)
