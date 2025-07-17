@@ -453,16 +453,23 @@ def add_comment(request, post_id):
 def create_blog_post(request):
     if request.method == "POST":
         form = BlogPostForm(request.POST, request.FILES)
+        files = request.FILES.getlist('images')  
+
         if form.is_valid():
             blog_post = form.save(commit=False)
             blog_post.author = request.user
             blog_post.save()
+
+            
+            for file in files:
+                BlogPostImage.objects.create(blog_post=blog_post, image=file)
+
             messages.success(request, "Your blog post has been published!")
             return redirect('blog_list')
     else:
         form = BlogPostForm()
-    return render(request, 'create_post.html', {'form': form})
 
+    return render(request, 'create_post.html', {'form': form})
 
 @login_required
 def delete_blog_post(request, slug):

@@ -190,7 +190,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost", "global-vhly.onrender.com", "christci
 
 FLW_SECRET_KEY = os.getenv("FLW_SECRET_KEY", "")
 FLW_ENCRYPTION_KEY = os.getenv("FLW_ENCRYPTION_KEY", "")
-FLW_REDIRECT_URL = "https://www.christcityglobaloutreach.org/donation_confirm/"
+FLW_REDIRECT_URL = "https://www.christcityglobaloutreach.com/donation_confirm/"
 
 
 
